@@ -1,703 +1,298 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Configuración inicial del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen | La Nueva Era de la Limpieza</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Título de la página que aparece en la pestaña del navegador -->
+    <title>Mi Sitio Web Paso a Paso</title>
     
+    <!-- Fuente Montserrat desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Script para cargar Tailwind CSS para estilos rápidos -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Estilos básicos para la nueva tipografía (Montserrat para títulos/logo, system-ui para cuerpo) */
         body {
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* Animaciones Personalizadas */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, visibility;
-        }
-
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: none;
-        }
-
-        /* Efecto de onda en el Hero */
-        .hero-bg {
-            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-shape {
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-            transform: rotate(180deg);
-        }
-
-        .hero-shape svg {
-            position: relative;
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 60px;
-        }
-
-        .hero-shape .shape-fill {
-            fill: #FFFFFF;
-        }
-
-        /* Scroll Horizontal Limpio */
-        .hide-scroll-bar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scroll-bar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Tarjetas de Producto */
-        .product-card {
-            transition: all 0.3s ease;
+            font-family: 'system-ui', sans-serif; /* Fuente del cuerpo para alta legibilidad */
+            min-height: 100vh;
+            background-color: #f7f7f7; /* Fondo gris claro */
+            margin: 0;
+            padding-top: 64px; /* Añade espacio en la parte superior para que el navbar fijo no tape el contenido */
         }
         
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        /* Aplicamos Montserrat específicamente al logo/título donde la usaremos */
+        .font-logo {
+            font-family: 'Montserrat', sans-serif;
         }
 
-        /* Placeholder de Imagen */
-        .image-placeholder {
-            height: 160px;
-            background-color: #f3f4f6;
+        /* Contenedor central: quitamos el padding para que el carrusel sea full width */
+        #content-wrapper {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            text-align: center;
-            color: #6b7280;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        /* Altura de Imagen de Producto - Restaurada a 'cover' */
-        .product-image {
-            height: 160px; /* Altura fija para el contenedor */
+            align-items: flex-start; /* Alineamos el contenido al inicio (arriba) */
             width: 100%;
-            object-fit: cover; /* La imagen cubrirá el área para que se vea grande */
-            background-color: #ffffff;
-            padding: 10px; 
-            border-top-left-radius: 0.75rem; 
-            border-top-right-radius: 0.75rem; 
+            flex-direction: column; /* Aseguramos que los elementos fluyan verticalmente */
+        }
+        
+        /* Estilo para la barra de desplazamiento horizontal oculta */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
 
-        /* Botones Flotantes */
-        .floating-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        /* ------------------ ANIMACIÓN DE REBOTE PARA EL LOGO ------------------ */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+                /* Función de temporización que desacelera al inicio, simula caída */
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+            50% {
+                transform: translateY(-20px); /* Altura del rebote: 20px */
+                /* Función de temporización que acelera al inicio, simula subida */
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            }
         }
 
-        .floating-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            color: white;
-            font-size: 28px;
-            text-decoration: none;
+        .bouncing-logo {
+            animation: bounce 2s infinite; /* Aplica la animación cada 2 segundos, infinitamente */
         }
-
-        .btn-whatsapp {
-            background-color: #25D366;
-            animation: pulse-green 2s infinite;
-        }
-
-        .btn-phone {
-            background-color: #3b82f6;
-        }
-
-        .floating-btn:hover {
-            transform: scale(1.1);
-        }
-
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
+        /* ------------------------------------------------------------------------ */
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
-
-    <!-- Navegación -->
-    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center gap-2">
-                        <i class="fa-solid fa-sparkles text-blue-500 text-2xl"></i>
-                        <span class="font-bold text-2xl tracking-tighter text-blue-900">Next<span class="text-blue-500">Gen</span></span>
-                    </div>
-                </div>
-                <div class="hidden md:flex space-x-6 items-center">
-                    <a href="#inicio" class="text-gray-600 hover:text-blue-500 transition font-medium">Inicio</a>
-                    <a href="#productos" class="text-gray-600 hover:text-blue-500 transition font-medium">Productos</a>
-                    <a href="#ubicacion" class="text-gray-600 hover:text-blue-500 transition font-medium">Ubicación</a>
-                    
-                    <div class="flex items-center gap-3 ml-4">
-                        <a href="https://wa.me/526561010854?text=Hola,%20me%20interesa%20información%20sobre%20sus%20productos" target="_blank" class="text-green-500 hover:text-green-600 text-3xl transition transform hover:scale-110" title="Enviar WhatsApp">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </a>
-                        <a href="tel:+526561010854" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full font-semibold transition transform hover:scale-105 shadow-lg flex items-center gap-2">
-                            <i class="fa-solid fa-phone"></i> Llamar
-                        </a>
-                    </div>
-                </div>
-                <!-- Menú Móvil Botón -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-blue-500 focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
+<body>
+    <!-- 1. BARRA DE NAVEGACIÓN SUPERIOR (NAVBAR) -->
+    <!-- Ahora solo contiene el logo que es el enlace de inicio. -->
+    <nav class="fixed top-0 w-full h-16 bg-blue-50 shadow-md z-10 flex items-center px-4 md:px-8">
+        <!-- Logo como Enlace de Inicio -->
+        <a href="https://jimenhersolutions.github.io/NextGen/" class="flex items-center">
+            <div class="font-logo text-2xl font-extrabold text-blue-800 tracking-tight">
+                Next<span class="text-blue-400">Gen</span>
             </div>
-        </div>
-        <!-- Menú Móvil Desplegable -->
-        <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-50">Inicio</a>
-                <a href="#productos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-50">Productos</a>
-                <a href="#ubicacion" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-50">Ubicación</a>
-                <div class="flex gap-2 mt-4 px-3">
-                    <a href="https://wa.me/526561010854?text=Hola,%20me%20interesa%20información%20sobre%20sus%20productos" class="flex-1 text-center bg-green-500 hover:bg-green-600 text-white px-3 py-3 rounded-md font-bold transition">
-                        <i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp
-                    </a>
-                    <a href="tel:+526561010854" class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white px-3 py-3 rounded-md font-bold transition">
-                        <i class="fa-solid fa-phone mr-2"></i> Llamar
-                    </a>
-                </div>
-            </div>
-        </div>
+        </a>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="hero-bg pt-32 pb-40 px-4 sm:px-6 lg:px-8 relative text-white text-center md:text-left">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 fade-in-section">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-                    Limpieza Avanzada para el <br> <span class="text-blue-200">Mundo Moderno</span>
-                </h1>
-                <p class="text-lg md:text-xl text-blue-100 mb-8 max-w-lg mx-auto md:mx-0">
-                    Descubre la calidad superior de NextGen. Todo lo que necesitas en un solo lugar.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <a href="#productos" class="bg-white text-blue-600 px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-100 transition transform hover:-translate-y-1">
-                        Ver Catálogo
-                    </a>
-                    <a href="https://wa.me/526561010854?text=Hola,%20quiero%20hacer%20un%20pedido" target="_blank" class="bg-green-500 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-green-600 transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-whatsapp"></i> Cotizar
-                    </a>
-                </div>
-            </div>
-            <div class="md:w-1/2 mt-12 md:mt-0 relative fade-in-section" style="transition-delay: 200ms;">
-                <div class="relative w-full max-w-md mx-auto aspect-square bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20 animate-[bounce_3s_infinite]">
-                    <i class="fa-solid fa-broom text-9xl text-white opacity-90 drop-shadow-2xl"></i>
-                    <div class="absolute top-0 right-0 w-16 h-16 bg-blue-300 rounded-full opacity-50 blur-xl animate-pulse"></div>
-                    <div class="absolute bottom-10 left-10 w-24 h-24 bg-white rounded-full opacity-30 blur-xl"></div>
-                </div>
-            </div>
-        </div>
-        <div class="hero-shape">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,A0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Catálogo de Productos (Scroll Horizontal) -->
-    <section id="productos" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-section">
-                <h2 class="text-blue-600 font-semibold tracking-wide uppercase text-sm">Nuestro Catálogo</h2>
-                <h3 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    Categorías de Productos
-                </h3>
-                <p class="mt-4 text-sm text-gray-500">Desliza horizontalmente para ver más <i class="fa-solid fa-arrow-right ml-1"></i></p>
-            </div>
-
-            <!-- SECCIÓN 1: TRAPEADORES -->
-            <div class="mb-16 fade-in-section">
-                <div class="flex items-center mb-1 px-2">
-                    <div class="bg-blue-100 p-2 rounded-lg mr-3"><i class="fa-solid fa-mop text-blue-600 text-xl"></i></div>
-                    <h3 class="text-2xl font-bold text-gray-800">Trapeadores</h3>
-                </div>
-                <!-- DESCRIPCIÓN AÑADIDA -->
-                <p class="text-base text-gray-600 mb-4 px-2">
-                    Nuestra selección premium combina alta absorción, durabilidad superior y la comodidad de un 
-                    <span class="font-semibold text-blue-700">mango ergonómico</span> para proteger tu espalda.
-                </p>
-                <div class="flex overflow-x-auto pb-8 hide-scroll-bar snap-x snap-mandatory gap-6 px-2">
-                    
-                    <!-- Item 1: Trapeador verde mix -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/4ZvH5MZ.jpeg" alt="Trapeador verde mix" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Trapeador verde mix</h4>
-                            <p class="text-sm text-gray-500">Limpieza eficiente con alta absorción. Ideal para uso diario en el hogar o negocio.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 2: Trapeador rojo mix -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/8TQiPVb.jpeg" alt="Trapeador rojo mix" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Trapeador rojo mix</h4>
-                            <p class="text-sm text-gray-500">Fibras resistentes que garantizan un arrastre de suciedad superior. Máxima durabilidad.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 3: Trapeador lila mix (IMAGEN ACTUALIZADA) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/Hurz7Cd.jpeg" alt="Trapeador lila mix" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Trapeador lila mix</h4>
-                            <p class="text-sm text-gray-500">Versatilidad y manejo ligero. Ideal para llegar a rincones y espacios reducidos.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 4: Trapeador azul mix -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/e4hqWjR.jpeg" alt="Trapeador azul mix" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Trapeador azul mix</h4>
-                            <p class="text-sm text-gray-500">Combinación de fibras para un secado rápido y acabados sin marcas.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 5: Trapeador negro (IMAGEN ACTUALIZADA) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/eVJs5Dx.jpeg" alt="Trapeador negro" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Trapeador negro</h4>
-                            <p class="text-sm text-gray-500">Materiales de uso rudo para ambientes exigentes. Perfecto para pisos industriales.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 6: Trapeador azul marino (IMAGEN ACTUALIZADA) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/qBIMYS4.jpeg" alt="Trapeador azul marino" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Trapeador azul marino</h4>
-                            <p class="text-sm text-gray-500">Diseño ergonómico y gran volumen de absorción. Uso profesional.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 7: Trapeador rosa (IMAGEN ACTUALIZADA) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/EyGwERn.jpeg" alt="Trapeador rosa" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Trapeador rosa</h4>
-                            <p class="text-sm text-gray-500">Suavidad para pisos delicados (madera, laminado) con excelente capacidad de recolección.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 8: Trapeador aqua (IMAGEN ACTUALIZADA) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/jFBV1ET.jpeg" alt="Trapeador aqua" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Trapeador aqua</h4>
-                            <p class="text-sm text-gray-500">Cabezal de alta densidad que maximiza el rendimiento del detergente.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 9: Trapeador gris (IMAGEN ACTUALIZADA) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/kp18K6D.jpeg" alt="Trapeador gris" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Trapeador gris</h4>
-                            <p class="text-sm text-gray-500">El balance perfecto entre durabilidad y suavidad para todo tipo de pisos.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- SECCIÓN 2: ESCOBAS -->
-            <div class="mb-16 fade-in-section">
-                <div class="flex items-center mb-1 px-2">
-                    <div class="bg-orange-100 p-2 rounded-lg mr-3"><i class="fa-solid fa-broom text-orange-600 text-xl"></i></div>
-                    <h3 class="text-2xl font-bold text-gray-800">Escobas</h3>
-                </div>
-                <!-- DESCRIPCIÓN AÑADIDA -->
-                <p class="text-base text-gray-600 mb-4 px-2">
-                    Diseñadas para la máxima eficacia. Cerdas resistentes y la ligereza de un 
-                    <span class="font-semibold text-orange-700">mango ergonómico</span> que facilita el barrido sin esfuerzo.
-                </p>
-                <div class="flex overflow-x-auto pb-8 hide-scroll-bar snap-x snap-mandatory gap-6 px-2">
-                    
-                    <!-- Item 1: Escoba azul -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/WxrVgdQ.jpeg" alt="Escoba azul" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Escoba Mango Ergonómico (Azul)</h4>
-                            <p class="text-sm text-gray-500">Limpieza superior para pisos interiores y exteriores. Durabilidad garantizada.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 2: Escoba negra -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/I2mLwsZ.jpeg" alt="Escoba negra" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Escoba Mango Ergonómico (Negro)</h4>
-                            <p class="text-sm text-gray-500">Cerdas resistentes que atrapan todo tipo de suciedad y polvo fino.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 3: Escoba verde -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/8p3ZXjp.jpeg" alt="Escoba verde" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Escoba Mango Ergonómico (Verde)</h4>
-                            <p class="text-sm text-gray-500">Diseñada para barrer con la máxima comodidad y eficiencia.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 4: Escoba rosa (IMAGEN ACTUALIZADA) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/74Tvhke.jpeg" alt="Escoba rosa" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Escoba Mango Ergonómico (Rosa)</h4>
-                            <p class="text-sm text-gray-500">Fácil de usar y ligera, para una limpieza rápida y efectiva en el hogar.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 5: Escoba café (IMAGEN ACTUALIZADA) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/UrdUnW2.jpeg" alt="Escoba café" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Escoba Mango Ergonómico (Café)</h4>
-                            <p class="text-sm text-gray-500">Ideal para un barrido completo, sin dejar rastros de suciedad.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- SECCIÓN 3: RECOGEDORES (ACTUALIZADA CON IMÁGENES) -->
-            <div class="mb-16 fade-in-section">
-                <div class="flex items-center mb-1 px-2">
-                    <div class="bg-gray-200 p-2 rounded-lg mr-3"><i class="fa-solid fa-trash-can text-gray-600 text-xl"></i></div>
-                    <h3 class="text-2xl font-bold text-gray-800">Recogedores</h3>
-                </div>
-                <!-- DESCRIPCIÓN AÑADIDA -->
-                <p class="text-base text-gray-600 mb-4 px-2">
-                    Di adiós al polvo y los residuos. Nuestros recogedores están diseñados para sellar 
-                    perfectamente contra el suelo, asegurando que cada barrido sea limpio y completo.
-                </p>
-                <div class="flex overflow-x-auto pb-8 hide-scroll-bar snap-x snap-mandatory gap-6 px-2">
-                    
-                    <!-- Item 1: Recogedor azul -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/V1I6n9R.jpeg" alt="Recogedor azul con bastón" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Recogedor Industrial (Azul)</h4>
-                            <p class="text-sm text-gray-500">Mango largo y diseño robusto. Ideal para entornos comerciales y uso rudo.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 2: Recogedor gris (Mano) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/EZJa3dV.jpeg" alt="Recogedor de mano gris" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Recogedor de Mano Premium</h4>
-                            <p class="text-sm text-gray-500">Bordes de goma para un agarre perfecto y fácil de limpiar. Básico y económico.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 3: Recogedor naranja (c/ Bastón) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/QcBlRKq.jpeg" alt="Recogedor naranja con bastón" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Recogedor Ergonómico (Naranja)</h4>
-                            <p class="text-sm text-gray-500">Para una limpieza cómoda sin necesidad de agacharse, con tapa abatible.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 4: Recogedor rosa (c/ Bastón) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/aa6hvRk.jpeg" alt="Recogedor rosa con bastón" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Recogedor Ergonómico (Rosa)</h4>
-                            <p class="text-sm text-gray-500">Cuerpo ligero y resistente. Ideal para salones de belleza o espacios delicados.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 5: Recogedor verde (c/ Bastón) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/TxGl6rt.jpeg" alt="Recogedor verde con bastón" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Recogedor Ergonómico (Verde)</h4>
-                            <p class="text-sm text-gray-500">Recolección de basura fácil y rápida. Mantiene las manos limpias en todo momento.</p>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-
-            <!-- SECCIÓN 4: MINISPLITS -->
-            <div class="mb-16 fade-in-section">
-                <div class="flex items-center mb-1 px-2">
-                    <div class="bg-cyan-100 p-2 rounded-lg mr-3"><i class="fa-regular fa-snowflake text-cyan-600 text-xl"></i></div>
-                    <h3 class="text-2xl font-bold text-gray-800">Minisplits y Accesorios</h3>
-                </div>
-                <!-- DESCRIPCIÓN ACTUALIZADA -->
-                <p class="text-base text-gray-600 mb-4 px-2">
-                    Selecciona el minisplit perfecto para climatizar tu espacio. Ofrecemos equipos de alto rendimiento que garantizan el máximo confort, eficiencia y un aire más puro. Contamos con equipos estándar y tecnología Inverter.
-                </p>
-                <div class="flex overflow-x-auto pb-8 hide-scroll-bar snap-x snap-mandatory gap-6 px-2">
-                    
-                    <!-- Item 1: Minisplit Frikko AVANT (Estándar) -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/NvuTxFn.jpeg" alt="Minisplit Frikko AVANT Frío/Calor" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Minisplit Frikko AVANT (12 SEER)</h4>
-                            <p class="text-sm text-gray-500">
-                                Máximo confort Frío/Calor con **Eficiencia 12 SEER**. Disponible en 110V y 220V. 
-                                <span class="font-semibold text-cyan-700">Garantía Extendida:</span> 1 año en condensadora y 3 años en evaporadora. 
-                                Somos **Distribuidores Autorizados** con el **mejor precio de la ciudad**. 
-                                ¡Incluye **entrega a domicilio sin costo**! Te asesoramos con técnicos certificados para la instalación.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Item 2: Minisplit Frikko INVERTER FIT 18+ -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/03MMnjO.jpeg" alt="Minisplit Frikko INVERTER FIT 18+" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Frikko INVERTER FIT 18+ (Ahorro Superior)</h4>
-                            <p class="text-sm text-gray-500">
-                                Tecnología **INVERTER FIT 18+** para un **Ahorro de Energía Superior** y control total de la temperatura (Frío/Calor). Mantiene la **Eficiencia 12 SEER** y está disponible en 110V y 220V. Somos **Distribuidores Autorizados** con el **mejor precio de la ciudad**. Te brindamos **Entrega a Domicilio Sin Costo**. Garantía de 3 años en evaporadora y 1 año en condensadora.
-                            </p>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-
-            <!-- SECCIÓN 5: CUBETAS (ÚNICO PRODUCTO) -->
-            <div class="mb-16 fade-in-section">
-                <div class="flex items-center mb-1 px-2">
-                    <div class="bg-yellow-100 p-2 rounded-lg mr-3"><i class="fa-solid fa-bucket text-yellow-600 text-xl"></i></div>
-                    <h3 class="text-2xl font-bold text-gray-800">Cubetas</h3>
-                </div>
-                <!-- DESCRIPCIÓN AGREGADA -->
-                <p class="text-base text-gray-600 mb-4 px-2">
-                    Una solución eficiente y de **uso rudo** para entornos profesionales. Equipada con ruedas silenciosas y un exprimidor de alta palanca, te permite trapear sin esfuerzo ni contacto directo.
-                </p>
-                <div class="flex overflow-x-auto pb-8 hide-scroll-bar snap-x snap-mandatory gap-6 px-2">
-                    <!-- Único Producto: Cubeta Exprimidora -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/4QFnet9.jpeg" alt="Cubeta exprimidora profesional" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Cubeta Exprimidora Profesional 36L</h4>
-                            <p class="text-sm text-gray-500">Diseño de alto rendimiento. La herramienta definitiva para pisos impecables.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECCIÓN 6: TRAPOS (ÚNICO PRODUCTO) -->
-            <div class="mb-16 fade-in-section">
-                <div class="flex items-center mb-4 px-2">
-                    <div class="bg-purple-100 p-2 rounded-lg mr-3"><i class="fa-solid fa-rug text-purple-600 text-xl"></i></div>
-                    <h3 class="text-2xl font-bold text-gray-800">Trapos</h3>
-                </div>
-                <!-- DESCRIPCIÓN AGREGADA -->
-                <p class="text-base text-gray-600 mb-4 px-2">
-                    La herramienta esencial para un acabado perfecto. Nuestra microfibra de alta densidad atrapa el polvo y absorbe líquidos sin dejar rastros ni pelusa.
-                </p>
-                <div class="flex overflow-x-auto pb-8 hide-scroll-bar snap-x snap-mandatory gap-6 px-2">
-                    <!-- Único Producto: Paño Microfibra -->
-                    <div class="flex-shrink-0 w-64 md:w-72 bg-white rounded-xl shadow-md product-card snap-center overflow-hidden border border-gray-100">
-                        <img src="https://i.imgur.com/tgdfZuW.jpeg" alt="Paño de microfibra 40x40" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/CCCCCC/333333?text=Sin+Imagen';" loading="lazy">
-                        <div class="p-4">
-                            <h4 class="font-bold text-lg mb-1">Paño de Microfibra 40x40</h4>
-                            <p class="text-sm text-gray-500">Súper absorbente y versátil. Ideal para lavado de autos, cocina, taller y limpieza general del hogar.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Características (Icon Grid) -->
-    <section class="py-16 bg-white border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="fade-in-section p-4 rounded-xl hover:bg-gray-50 transition">
-                    <i class="fa-solid fa-truck-fast text-4xl text-blue-500 mb-4"></i>
-                    <h5 class="font-bold">Entrega Rápida</h5>
-                </div>
-                <div class="fade-in-section p-4 rounded-xl hover:bg-gray-50 transition" style="transition-delay: 100ms;">
-                    <i class="fa-solid fa-hand-holding-dollar text-4xl text-blue-500 mb-4"></i>
-                    <h5 class="font-bold">Precios de Mayorista</h5>
-                </div>
-                <div class="fade-in-section p-4 rounded-xl hover:bg-gray-50 transition" style="transition-delay: 200ms;">
-                    <i class="fa-solid fa-leaf text-4xl text-blue-500 mb-4"></i>
-                    <h5 class="font-bold">Eco-Amigable</h5>
-                </div>
-                <div class="fade-in-section p-4 rounded-xl hover:bg-gray-50 transition" style="transition-delay: 300ms;">
-                    <i class="fa-solid fa-medal text-4xl text-blue-500 mb-4"></i>
-                    <h5 class="font-bold">Garantía Total</h5>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ubicación y Contacto -->
-    <section id="ubicacion" class="relative bg-gray-900 text-white py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-12">
+    <!-- Contenedor principal -->
+    <div id="content-wrapper">
+        <!-- Contenedor general que fluye -->
+        <div id="content-container" class="w-full">
             
-            <!-- Info Contacto -->
-            <div class="md:w-1/3 fade-in-section">
-                <h2 class="text-3xl font-bold mb-6 text-blue-400">Visítanos</h2>
-                <p class="mb-8 text-gray-300">Estamos ubicados estratégicamente para atender a toda la ciudad. Ven a conocer nuestro showroom.</p>
-                
-                <div class="space-y-6">
-                    <div class="flex items-start">
-                        <div class="bg-blue-600 p-3 rounded-lg mr-4">
-                            <i class="fa-solid fa-location-dot text-xl"></i>
+            <!-- 2. CARRUSEL DE IMÁGENES -->
+            <div id="carousel-slides" class="relative w-full h-[calc(100vh-64px)] overflow-hidden bg-gray-100">
+                <!-- Imagen 1 -->
+                <img src="https://i.imgur.com/0YB0bse.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" data-index="0" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Trapeadores';" alt="Trapeadores y cubetas de limpieza">
+                <!-- Imagen 2 -->
+                <img src="https://i.imgur.com/eRIr8GZ.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" data-index="1" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Escobas';" alt="Escobas y plumeros">
+                <!-- Imagen 3 -->
+                <img src="https://i.imgur.com/U863lfj.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" data-index="2" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Productos';" alt="Productos de limpieza variados">
+                <!-- Imagen 4 -->
+                <img src="https://i.imgur.com/Mwgx4zd.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" data-index="3" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Esponjas';" alt="Esponjas y cepillos">
+                <!-- Imagen 5 -->
+                <img src="https://i.imgur.com/3TCP76u.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" data-index="4" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Equipo';" alt="Equipo de limpieza profesional">
+            </div>
+
+            <!-- 2.5 LOGO REBOTANDO -->
+            <div class="py-12 md:py-16 flex justify-center items-center bg-gray-50 border-b border-gray-200">
+                <!-- El filtro drop-shadow ayuda a que el logo se vea mejor sobre fondos claros y simula un poco el rebote -->
+                <img src="https://i.imgur.com/r2mDTzK.png" 
+                     alt="Logo animado de la empresa NextGen" 
+                     class="w-32 h-32 md:w-48 md:h-48 object-contain bouncing-logo shadow-2xl rounded-full"
+                     style="filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));"
+                     >
+            </div>
+            
+            <!-- 3. SECCIÓN DE PRODUCTOS: TRAPEADORES (Carrusel Horizontal) -->
+            <section id="trapeadores" class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 md:px-8">
+                    <!-- Encabezado de la sección (estilo pestaña/título) -->
+                    <div class="flex flex-col items-start mb-6">
+                        <div class="inline-block border-b-4 border-blue-500 pb-2">
+                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Trapeadores</h2>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-lg">Dirección</h4>
-                            <p class="text-gray-300 text-sm">
-                                Francisco Villareal Torres 2050-A,<br>
-                                C. Valle del Sol, 32422<br>
-                                Juárez, Chih.
-                            </p>
-                        </div>
+                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
+                            Descubre nuestra línea premium de trapeadores diseñados para máxima absorción y durabilidad. 
+                            Ideales para todo tipo de superficies, dejando tus pisos impecables con menos esfuerzo.
+                        </p>
                     </div>
 
-                    <div class="flex items-start">
-                        <div class="bg-blue-600 p-3 rounded-lg mr-4">
-                            <i class="fa-solid fa-phone text-xl"></i>
+                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+                        
+                        <!-- Tarjeta 1 (Modelo Clásico) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <!-- Imagen real 1 -->
+                                <img src="https://i.imgur.com/1G841Vo.jpeg" alt="Trapeador Modelo Clásico" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="text-sm text-gray-500 mt-1">Elaborado con algodón de alta densidad, garantiza una absorción superior. Su mango metálico resistente y ergonómico es ideal para uso diario y limpieza profunda.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-lg">Llámanos</h4>
-                            <p class="text-gray-300 text-sm mb-2">Atención personalizada inmediata.</p>
-                            <a href="tel:+526561010854" class="text-blue-400 hover:text-white font-bold transition text-lg">
-                                +52 656 101 0854
-                            </a>
+                        
+                        <!-- Tarjeta 2 (Microfibra Pro) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <!-- Imagen real 2 -->
+                                <img src="https://i.imgur.com/U1LHk4W.jpeg" alt="Trapeador Microfibra Pro" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="text-sm text-gray-500 mt-1">Diseño de microfibra que atrapa el 99% de las bacterias. Ideal para pisos delicados (madera, laminados) y perfecto para usarse en seco o húmedo, sin dejar residuos.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 3 (Sistema Giratorio) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <!-- Imagen real 3 -->
+                                <img src="https://i.imgur.com/l6Elvc2.jpeg" alt="Trapeador Sistema Giratorio" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="text-sm text-gray-500 mt-1">Incorpora un cabezal giratorio de 360° para acceder a esquinas difíciles. Su mecanismo de auto-escurrido reduce el esfuerzo físico y mantiene las manos secas.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 4 (Repuestos Industriales) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <!-- Imagen real 4 -->
+                                <img src="https://i.imgur.com/fL2ct0o.jpeg" alt="Trapeador Repuestos Industriales" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="text-sm text-gray-500 mt-1">Fibras sintéticas de alta resistencia para uso rudo y profesional. Soporta ciclos de lavado intensos y es compatible con la mayoría de los mangos comerciales.</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="pt-6 flex flex-col gap-3">
-                        <button onclick="window.open('https://wa.me/526561010854?text=Hola,%20busco%20información', '_blank')" class="w-full bg-green-500 text-white font-bold py-4 rounded-xl hover:bg-green-600 transition shadow-lg flex justify-center items-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-xl"></i> ENVIAR MENSAJE
-                        </button>
+                    <!-- Botón "Ver Productos" (para Trapeadores) -->
+                    <div class="mt-8 text-center">
+                        <a href="https://jimenhersolutions.github.io/nextgen-seccion-trapeadores/" 
+                           class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 uppercase tracking-wider"
+                           role="button">
+                            Ver Productos de Trapeadores
+                        </a>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Mapa -->
-            <div class="md:w-2/3 h-96 md:h-auto rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-700 fade-in-section relative group" style="transition-delay: 200ms;">
-                <!-- Iframe Google Maps -->
-                <iframe 
-                    class="w-full h-full grayscale group-hover:grayscale-0 transition duration-700"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3393.123456789!2d-106.398!3d31.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDQyJzAwLjAiTiAxMDbCsDI0JzAwLjAiVw!5e0!3m2!1ses!2smx!4v1600000000000!5m2!1ses!2smx&q=Francisco+Villareal+Torres+2050-A,+C.+Valle+del+Sol,+32422+Juárez,+Chih." 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-                <!-- Badge Flotante sobre el mapa -->
-                <div class="absolute bottom-4 right-4 bg-white text-gray-900 px-4 py-2 rounded-lg shadow-lg text-sm font-bold flex items-center">
-                     <i class="fa-brands fa-google text-red-500 mr-2"></i> Abrir en Maps
+            <!-- 4. NUEVA SECCIÓN DE PRODUCTOS: ESCOBAS Y CEPILLOS (Carrusel Horizontal) -->
+            <section id="escobas" class="py-16 bg-gray-100">
+                <div class="max-w-7xl mx-auto px-4 md:px-8">
+                    <!-- Encabezado de la sección (estilo pestaña/título) -->
+                    <div class="flex flex-col items-start mb-6">
+                        <div class="inline-block border-b-4 border-blue-500 pb-2">
+                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Escobas y Cepillos</h2>
+                        </div>
+                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
+                            Barrido eficiente para cada rincón. Nuestra selección incluye desde escobas ligeras para interiores hasta cepillos industriales para uso rudo y grandes áreas.
+                        </p>
+                    </div>
+
+                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+                        
+                        <!-- Tarjeta 1 (Escoba para Interiores) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <!-- Imagen Escoba 1 (Interior) -->
+                                <img src="https://i.imgur.com/x0qD8Yp.jpeg" alt="Escoba de interiores" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <h3 class="text-base font-bold text-gray-800">Escoba para Interiores</h3>
+                                <p class="text-sm text-gray-500 mt-1">Cerdas de polipropileno suaves y en ángulo, perfectas para recoger el polvo fino y pelo de mascotas sin rayar pisos delicados como la madera o cerámica.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta 2 (Cepillo de Exterior Industrial) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <!-- Imagen Escoba 2 (Exterior) -->
+                                <img src="https://i.imgur.com/gK6B4tX.jpeg" alt="Escoba de exterior industrial" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <h3 class="text-base font-bold text-gray-800">Cepillo de Exterior</h3>
+                                <p class="text-sm text-gray-500 mt-1">Cerdas duras y gruesas, ideales para barrer hojas, tierra y escombros en patios, garajes y aceras. Mango reforzado de alta resistencia a la intemperie.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 3 (Mini Cepillo y Recogedor) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <!-- Imagen Cepillo 3 (Pequeño) -->
+                                <img src="https://i.imgur.com/W2bQ7pU.jpeg" alt="Mini cepillo de mano" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <h3 class="text-base font-bold text-gray-800">Mini Cepillo y Recogedor</h3>
+                                <p class="text-sm text-gray-500 mt-1">Compacto y ligero, diseñado para limpiar derrames pequeños en mostradores, mesas y teclados. Cerdas flexibles que garantizan la máxima recogida de partículas.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 4 (Escoba de Goma Multifuncional) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <!-- Imagen Escoba 4 (Goma) -->
+                                <img src="https://i.imgur.com/sY7v7eA.jpeg" alt="Escoba de goma" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <h3 class="text-base font-bold text-gray-800">Escoba de Goma</h3>
+                                <p class="text-sm text-gray-500 mt-1">Ideal para recoger líquidos, pelo y suciedad incrustada en alfombras. Funciona como cepillo y secador. Es fácil de lavar y no acumula bacterias.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Botón "Ver Productos" (para Escobas) -->
+                    <div class="mt-8 text-center">
+                        <!-- El enlace por ahora no lleva a ningún sitio específico (usa #) -->
+                        <a href="#" 
+                           class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 uppercase tracking-wider"
+                           role="button">
+                            Ver Productos de Escobas
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </section>
+            
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800 text-center py-8">
-        <p class="text-gray-500 text-sm">
-            &copy; 2023 NextGen Limpieza. Todos los derechos reservados. <br>
-            Hecho con <i class="fa-solid fa-heart text-red-500"></i> en Juárez, Chih.
-        </p>
-    </footer>
-
-    <!-- Botones Flotantes Fijos (WhatsApp + Teléfono) -->
-    <div class="floating-container">
-        <a href="https://wa.me/526561010854?text=Hola,%20vengo%20de%20su%20página%20web" target="_blank" class="floating-btn btn-whatsapp" title="Mandar WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
-        <a href="tel:+526561010854" class="floating-btn btn-phone" title="Llamar">
-            <i class="fa-solid fa-phone"></i>
-        </a>
     </div>
 
-    <!-- Scripts -->
     <script>
-        // Lógica del Menú Móvil
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+        // Lógica del carrusel para cambiar imágenes automáticamente
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.carousel-slide');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            const intervalTime = 3000; // 3000 ms = 3 segundos
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        // Intersection Observer para Animaciones al hacer Scroll
-        document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Dejar de observar una vez animado
+            /** Muestra la diapositiva en el índice dado, ocultando las demás con transición de opacidad. */
+            function showSlide(index) {
+                // Asegura que el índice esté dentro del rango [0, totalSlides-1]
+                currentSlide = (index + totalSlides) % totalSlides; 
+                
+                slides.forEach((slide, i) => {
+                    if (i === currentSlide) {
+                        slide.classList.remove('opacity-0');
+                        slide.classList.add('opacity-100');
+                    } else {
+                        slide.classList.remove('opacity-100');
+                        slide.classList.add('opacity-0');
                     }
                 });
-            }, observerOptions);
-
-            const sections = document.querySelectorAll('.fade-in-section');
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-
-        // Efecto Navbar al hacer Scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('py-0');
-                navbar.classList.remove('py-2');
-            } else {
-                navbar.classList.add('py-2');
-                navbar.classList.remove('py-0');
             }
+
+            /** Avanza a la siguiente diapositiva. */
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+            
+            // Inicia el carrusel
+            showSlide(currentSlide);
+
+            // Configura el intervalo para el cambio automático cada 3 segundos
+            setInterval(nextSlide, intervalTime);
         });
     </script>
 </body>
