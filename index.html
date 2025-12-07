@@ -9,6 +9,8 @@
     
     <!-- Fuente Montserrat desde Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Iconos de Font Awesome (Añadido para el ícono de Visión, Misión y Valores y WhatsApp) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <!-- Script para cargar Tailwind CSS para estilos rápidos -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -61,6 +63,46 @@
 
         .bouncing-logo {
             animation: bounce 2s infinite; /* Aplica la animación cada 2 segundos, infinitamente */
+        }
+        /* ------------------------------------------------------------------------ */
+
+        /* ------------------ ESTILOS PARA EL BOTÓN FLOTANTE DE CONTACTO ------------------ */
+        .floating-container {
+            position: fixed;
+            bottom: 20px; /* Separación del fondo */
+            right: 20px; /* Separación de la derecha */
+            z-index: 1000; /* Asegura que esté por encima de otros elementos */
+            display: flex;
+            flex-direction: column; /* Apila los botones verticalmente */
+            gap: 12px; /* Espacio entre los botones */
+        }
+        
+        .floating-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px; /* Tamaño del botón */
+            height: 60px;
+            border-radius: 50%; /* Forma circular */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            color: white; /* Color del ícono */
+            font-size: 28px; /* Tamaño del ícono */
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1); /* Ligero agrandamiento al pasar el mouse */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo específico para WhatsApp (verde oficial) */
+        .btn-whatsapp {
+            background-color: #25D366; /* Verde de WhatsApp */
+        }
+
+        /* Estilo específico para Teléfono (azul principal) */
+        .btn-phone {
+            background-color: #3b82f6; /* Azul de Tailwind 500 */
         }
         /* ------------------------------------------------------------------------ */
     </style>
@@ -117,6 +159,10 @@
                         <p class="mt-4 text-lg text-gray-600 max-w-3xl">
                             Descubre nuestra línea premium de trapeadores diseñados para máxima absorción y durabilidad. 
                             Ideales para todo tipo de superficies, dejando tus pisos impecables con menos esfuerzo.
+                            <!-- Precio fijo agregado para Trapeadores -->
+                            <span class="font-bold text-lg text-blue-700">Precio unitario:</span> 
+                            <span class="font-extrabold text-xl text-green-600">$220</span>. 
+                            ¡Calidad garantizada!
                         </p>
                     </div>
 
@@ -187,49 +233,45 @@
                         <div class="inline-block border-b-4 border-blue-500 pb-2">
                             <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Cubetas</h2>
                         </div>
+                        <!-- Descripción con el precio fijo en VERDE -->
                         <p class="mt-4 text-lg text-gray-600 max-w-3xl">
-                            Nuestras cubetas están fabricadas con plástico de alta resistencia y diseñadas para soportar el uso intensivo, 
-                            ideales para mezclar soluciones y transportar agua de forma segura.
+                            Nuestras cubetas están fabricadas con plástico de alta resistencia, ideales para uso intensivo. 
+                            <span class="font-bold text-lg text-blue-700">Precio fijo:</span> 
+                            <span class="font-extrabold text-xl text-green-600">$180</span> por cubeta, disponibles en varios colores.
                         </p>
                     </div>
 
                     <!-- Contenedor Deslizable Horizontal (Scrollable) -->
                     <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
                         
-                        <!-- Tarjeta 1 (Cubeta 1 - NUEVA IMAGEN) -->
+                        <!-- Tarjeta 1 (Cubeta 1) - SIN TEXTO INFERIOR -->
                         <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <!-- IMAGEN ACTUALIZADA -->
                                 <img src="https://i.imgur.com/czY6SYk.jpeg" alt="Cubeta de color gris profesional" class="w-full h-full object-cover">
                             </div>
                         </div>
                         
-                        <!-- Tarjeta 2 (Cubeta 2 - NUEVA IMAGEN) -->
+                        <!-- Tarjeta 2 (Cubeta 2) - SIN TEXTO INFERIOR -->
                         <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <!-- IMAGEN ACTUALIZADA -->
                                 <img src="https://i.imgur.com/0M7mEGG.jpeg" alt="Cubeta con escurridor amarillo" class="w-full h-full object-cover">
                             </div>
                         </div>
 
-                        <!-- Tarjeta 3 (Cubeta 3 - NUEVA IMAGEN) -->
+                        <!-- Tarjeta 3 (Cubeta 3) - SIN TEXTO INFERIOR -->
                         <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <!-- IMAGEN ACTUALIZADA -->
                                 <img src="https://i.imgur.com/OulZxLs.jpeg" alt="Cubeta industrial de gran capacidad" class="w-full h-full object-cover">
                             </div>
                         </div>
 
-                        <!-- Tarjeta 4 (Cubeta 4 - NUEVA IMAGEN) -->
+                        <!-- Tarjeta 4 (Cubeta 4) - SIN TEXTO INFERIOR -->
                         <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <!-- IMAGEN ACTUALIZADA -->
                                 <img src="https://i.imgur.com/HcIVZYL.jpeg" alt="Juego de cubetas de colores" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Botón "Ver Productos" (para Cubetas) ELIMINADO según solicitud -->
                 </div>
             </section>
             
@@ -243,40 +285,36 @@
                         </div>
                         <p class="mt-4 text-lg text-gray-600 max-w-3xl">
                             Barrido eficiente para cada rincón. Nuestra selección incluye desde escobas ligeras para interiores hasta cepillos industriales para uso rudo y grandes áreas.
+                            <!-- Precio fijo agregado para Escobas y Cepillos -->
+                            <span class="font-bold text-lg text-blue-700">Precio unitario:</span> 
+                            <span class="font-extrabold text-xl text-green-600">$180</span>. 
+                            Consulta disponibilidad.
                         </p>
                     </div>
 
                     <!-- Contenedor Deslizable Horizontal (Scrollable) -->
                     <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
                         
-                        <!-- Tarjeta 1 (Escoba 1 - NUEVA IMAGEN sin texto) -->
+                        <!-- Tarjeta 1 (Escoba 1) -->
                         <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <!-- IMAGEN ACTUALIZADA 1 -->
                                 <img src="https://i.imgur.com/hJO6Et0.jpeg" alt="Escoba de exterior" class="w-full h-full object-cover">
                             </div>
-                            <!-- ELIMINADO: DIV DE TEXTO -->
                         </div>
                         
-                        <!-- Tarjeta 2 (Escoba 2 - NUEVA IMAGEN sin texto) -->
+                        <!-- Tarjeta 2 (Escoba 2) -->
                         <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <!-- IMAGEN ACTUALIZADA 2 -->
                                 <img src="https://i.imgur.com/ayejAr2.jpeg" alt="Escoba de interiores con recogedor" class="w-full h-full object-cover">
                             </div>
-                            <!-- ELIMINADO: DIV DE TEXTO -->
                         </div>
 
-                        <!-- Tarjeta 3 (Escoba 3 - NUEVA IMAGEN sin texto) -->
+                        <!-- Tarjeta 3 (Escoba 3) -->
                         <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <!-- IMAGEN ACTUALIZADA 3 -->
                                 <img src="https://i.imgur.com/deC8slt.jpeg" alt="Cepillo de mango corto" class="w-full h-full object-cover">
                             </div>
-                            <!-- ELIMINADO: DIV DE TEXTO -->
                         </div>
-
-                        <!-- Tarjeta 4 (ELIMINADA) -->
                     </div>
                     
                     <!-- Botón "Ver Productos" (para Escobas) -->
@@ -290,13 +328,359 @@
                 </div>
             </section>
             
+            <!-- 6. SECCIÓN DE PRODUCTOS: RECOGEDORES -->
+            <section id="recogedores" class="py-16 bg-gray-100">
+                <div class="max-w-7xl mx-auto px-4 md:px-8">
+                    <!-- Encabezado de la sección -->
+                    <div class="flex flex-col items-start mb-6">
+                        <div class="inline-block border-b-4 border-blue-500 pb-2">
+                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Recogedores</h2>
+                        </div>
+                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
+                            Soluciones eficientes para recoger todo tipo de residuos. Recogedores de mano y de mango largo con diseño ergonómico.
+                            <!-- Precio fijo agregado para Recogedores -->
+                            <span class="font-bold text-lg text-blue-700">Precio unitario:</span> 
+                            <span class="font-extrabold text-xl text-green-600">$180</span>. 
+                            ¡Ideales para acompañar tus escobas!
+                        </p>
+                    </div>
+
+                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+                        
+                        <!-- Tarjeta 1 (Recogedor 1) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+                                <img src="https://i.imgur.com/MbchD0x.jpeg" alt="Recogedor 1" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta 2 (Recogedor 2) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+                                <img src="https://i.imgur.com/ThOIC3a.jpeg" alt="Recogedor 2" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 3 (Recogedor 3) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+                                <img src="https://i.imgur.com/QCRPZll.jpeg" alt="Recogedor 3" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. SECCIÓN DE PRODUCTOS: PAÑOS DE MICROFIBRA -->
+            <section id="microfibra" class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 md:px-8">
+                    <!-- Encabezado de la sección -->
+                    <div class="flex flex-col items-start mb-6">
+                        <div class="inline-block border-b-4 border-blue-500 pb-2">
+                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Paños de Microfibra</h2>
+                        </div>
+                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
+                            Máxima suavidad y absorción para todo tipo de limpieza. No rayan y son ideales para superficies delicadas.
+                            <!-- Precio fijo agregado para Paños de Microfibra -->
+                            <span class="font-bold text-lg text-blue-700">Precio por unidad:</span> 
+                            <span class="font-extrabold text-xl text-green-600">$40</span>. 
+                            Disponibles en paquetes de 5.
+                        </p>
+                    </div>
+
+                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+                        
+                        <!-- Tarjeta 1 (Paño 1) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+                                <img src="https://i.imgur.com/Ndy20BV.jpeg" alt="Paño de microfibra 1" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta 2 (Paño 2) -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+                                <img src="https://i.imgur.com/RXQUZsc.jpeg" alt="Paño de microfibra 2" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. SECCIÓN DE PRODUCTOS: COMBOS ESPECIALES -->
+            <section id="combos" class="py-16 bg-gray-100">
+                <div class="max-w-7xl mx-auto px-4 md:px-8">
+                    <!-- Encabezado de la sección -->
+                    <div class="flex flex-col items-start mb-6">
+                        <div class="inline-block border-b-4 border-blue-500 pb-2">
+                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Combos Especiales</h2>
+                        </div>
+                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
+                            Ahorra con nuestros paquetes de limpieza diseñados para cubrir todas tus necesidades, desde el hogar hasta el uso industrial.
+                        </p>
+                    </div>
+
+                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+                        
+                        <!-- Tarjeta 1 (Combo Hogar Completo) - PRECIO: $400 -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <img src="https://i.imgur.com/szcWai9.jpeg" alt="Paquete de Trapeador, Cubeta, Escoba y Paños" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="font-bold text-gray-800">Hogar Completo</p>
+                                <p class="text-sm text-gray-500 mt-1">Kit esencial: incluye trapeador de microfibra, cubeta ergonómica con exprimidor, escoba ligera y 3 paños multiusos. 
+                                    <span class="font-extrabold text-lg text-green-600">$400</span></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta 2 (Combo Pisos Delicados) - PRECIO: $360 -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <img src="https://i.imgur.com/eVDq2dS.jpeg" alt="Kit de limpieza para pisos sensibles" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="font-bold text-gray-800">Pisos Deluxe</p>
+                                <p class="text-sm text-gray-500 mt-1">Ideal para madera, laminado y mármol. Incluye trapeador plano de microfibra premium y un juego de 5 paños extra suaves para el pulido. 
+                                    <span class="font-extrabold text-lg text-green-600">$360</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 3 (Combo Baño y Cocina) - PRECIO: $550 -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <img src="https://i.imgur.com/znieg3X.jpeg" alt="Kit de cepillos y esponjas para cocina y baño" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="font-bold text-gray-800">Áreas Críticas</p>
+                                <p class="text-sm text-gray-500 mt-1">Paquete especializado con 3 cepillos de cerdas duras, 6 esponjas con fibra y 4 paños de cocina de alta absorción. Desinfección total.
+                                    <span class="font-extrabold text-lg text-green-600">$550</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 4 (Combo Industrial) - PRECIO: $700 -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <!-- Enlace Corregido -->
+                                <img src="https://i.imgur.com/rwtuENr.jpeg" alt="Kit de limpieza industrial y profesional" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="font-bold text-gray-800">Uso Profesional</p>
+                                <p class="text-sm text-gray-500 mt-1">Diseñado para grandes superficies. Contiene cubeta de 20 litros con ruedas, trapeador de uso rudo y 10 paños de microfibra industrial.
+                                    <span class="font-extrabold text-lg text-green-600">$700</span></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta 5 (Combo Eco-Limpieza) - PRECIO: $500 -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <!-- Enlace Corregido -->
+                                <img src="https://i.imgur.com/i1fOvoZ.jpeg" alt="Kit de limpieza ecológico" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="font-bold text-gray-800">Eco-Limpieza</p>
+                                <p class="text-sm text-gray-500 mt-1">Productos 100% biodegradables y reutilizables. Incluye 3 paños de bambú, un cepillo con mango de madera sostenible y guantes de algodón orgánico.
+                                    <span class="font-extrabold text-lg text-green-600">$500</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 9. SECCIÓN DE PRODUCTOS: MINISPLITS -->
+            <section id="minisplits" class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 md:px-8">
+                    <!-- Encabezado de la sección -->
+                    <div class="flex flex-col items-start mb-6">
+                        <div class="inline-block border-b-4 border-blue-500 pb-2">
+                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Minisplits</h2>
+                        </div>
+                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
+                            Ofrecemos soluciones de aire acondicionado de alta eficiencia para mantener cualquier espacio cómodo y fresco con el menor consumo de energía.
+                        </p>
+                    </div>
+
+                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+                        
+                        <!-- Tarjeta 1 (Minisplit Inverter) - PRECIO: $6,600 -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <img src="https://i.imgur.com/Rbj4AwJ.jpeg" alt="Minisplit con tecnología Inverter" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="font-bold text-gray-800">Inverter Alta Eficiencia</p>
+                                <p class="text-sm text-gray-500 mt-1">Sistema de climatización con tecnología Inverter para un ahorro energético superior. Enfría o calienta rápidamente con mínimo ruido. Ideal para dormitorios y oficinas. 
+                                    <span class="font-extrabold text-lg text-green-600">$6,600</span></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta 2 (Minisplit Estándar) - PRECIO: $5,500 -->
+                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                <img src="https://i.imgur.com/4kjUDHf.jpeg" alt="Minisplit Estándar" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3 text-center">
+                                <p class="font-bold text-gray-800">Modelo Estándar</p>
+                                <p class="text-sm text-gray-500 mt-1">Unidad de aire acondicionado económica y confiable, perfecta para espacios pequeños y uso ocasional. Cuenta con filtro purificador y control remoto fácil de usar. 
+                                    <span class="font-extrabold text-lg text-green-600">$5,500</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- El botón "Ver Minisplits y Especificaciones" ha sido eliminado. -->
+                </div>
+            </section>
+            
+            <!-- 10. SECCIÓN DE VISIÓN -->
+            <section id="vision" class="py-16 bg-blue-50">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section">
+                    <h2 class="text-blue-700 font-semibold tracking-wide uppercase text-sm mb-3">Nuestra Meta</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
+                        <!-- Imagen de la Visión -->
+                        <img src="https://i.imgur.com/gOORR2b.jpeg" 
+                             alt="Representación de un hogar limpio y moderno con productos de limpieza NextGen" 
+                             class="w-full h-auto rounded-xl -mt-6 mb-6 shadow-lg border-4 border-white transform hover:scale-[1.01] transition duration-300"
+                             onerror="this.onerror=null; this.src='https://placehold.co/800x200/5B83E9/ffffff?text=Visión+NextGen+Limpieza';"
+                             loading="lazy">
+                        <h3 class="mt-0 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 mb-4 flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-bullseye text-blue-600"></i> Visión
+                        </h3>
+                        <p class="mt-4 text-lg text-gray-600 italic">
+                            Ser reconocidos como el líder indiscutible en artículos de calidad y durabilidad. Buscamos que NEXTGEN sea sinónimo de eficiencia insuperable y el máximo cuidado para cada espacio, convirtiendo las tareas de limpieza en experiencias únicas con el uso de nuestros productos.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 11. SECCIÓN DE MISIÓN (Agregada después de Visión) -->
+            <section id="mision" class="py-16 bg-white">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section" style="transition-delay: 200ms;">
+                    <h2 class="text-blue-700 font-semibold tracking-wide uppercase text-sm mb-3">Nuestro Compromiso</h2>
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
+                        <!-- Imagen de la Misión -->
+                        <img src="https://i.imgur.com/cnVBLW2.jpeg" 
+                             alt="Primer plano de personas estrechando manos, representando compromiso y calidad" 
+                             class="w-full h-auto rounded-xl -mt-6 mb-6 shadow-lg border-4 border-gray-200 transform hover:scale-[1.01] transition duration-300"
+                             onerror="this.onerror=null; this.src='https://placehold.co/800x200/5B83E9/ffffff?text=Misión+NextGen+Limpieza';"
+                             loading="lazy">
+                        <h3 class="mt-0 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 mb-4 flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-handshake-angle text-blue-600"></i> Misión
+                        </h3>
+                        <p class="mt-4 text-lg text-gray-600 italic">
+                            Ofrecer a nuestros clientes los instrumentos de limpieza más avanzados y de la más alta calidad. Nuestro compromiso es superar las expectativas de nuestros clientes con productos que garantizan resultados impecables, duraderos y que aportan valor real al hogar, negocios y empresas.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 12. SECCIÓN DE VALORES (Agregada después de Misión) -->
+            <section id="valores" class="py-16 bg-blue-50">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section" style="transition-delay: 300ms;">
+                    <h2 class="text-blue-700 font-semibold tracking-wide uppercase text-sm mb-3">Principios Fundamentales</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
+                        <h3 class="mt-0 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 mb-6 flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-medal text-blue-600"></i> Valores NextGen
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                            <!-- Valor 1: Calidad Innegociable -->
+                            <div class="bg-blue-50 p-4 rounded-lg shadow-sm border border-blue-200">
+                                <h4 class="font-bold text-lg text-blue-800 mb-1 flex items-center gap-2"><i class="fa-solid fa-star text-blue-500"></i> Calidad Innegociable</h4>
+                                <p class="text-sm text-gray-600">La excelencia es nuestro punto de partida. Solo utilizamos los mejores materiales y procesos, asegurando que cada producto NEXTGEN tenga una vida útil superior y un rendimiento que justifica ser la mejor elección para nuestros clientes.</p>
+                            </div>
+                            <!-- Valor 2: Confianza y Transparencia -->
+                            <div class="bg-blue-50 p-4 rounded-lg shadow-sm border border-blue-200">
+                                <h4 class="font-bold text-lg text-blue-800 mb-1 flex items-center gap-2"><i class="fa-solid fa-handshake text-blue-500"></i> Confianza y Transparencia</h4>
+                                <p class="text-sm text-gray-600">Construimos relaciones a largo plazo. Ofrecemos información clara sobre la procedencia y composición de nuestros productos y garantizamos que el rendimiento prometido se cumpla, generando la tranquilidad de invertir en lo mejor.</p>
+                            </div>
+                            <!-- Valor 3: Innovación Constante -->
+                            <div class="bg-blue-50 p-4 rounded-lg shadow-sm border border-blue-200">
+                                <h4 class="font-bold text-lg text-blue-800 mb-1 flex items-center gap-2"><i class="fa-solid fa-lightbulb text-blue-500"></i> Innovación Constante</h4>
+                                <p class="text-sm text-gray-600">No nos conformamos con lo actual. Buscamos continuamente mejorar, integrar tecnología y diseño ergonómico para que nuestros artículos de limpieza no solo sean efectivos, sino también cómodos y eficientes de usar.</p>
+                            </div>
+                            <!-- Valor 4: Enfoque al Cliente Premium -->
+                            <div class="bg-blue-50 p-4 rounded-lg shadow-sm border border-blue-200">
+                                <h4 class="font-bold text-lg text-blue-800 mb-1 flex items-center gap-2"><i class="fa-solid fa-crown text-blue-500"></i> Enfoque al Cliente Premium</h4>
+                                <p class="text-sm text-gray-600">Entendemos y atendemos las necesidades del cliente que busca lo mejor. Estamos dedicados a escuchar sus comentarios para ofrecer una experiencia de compra y uso que refleje la alta calidad de nuestros productos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 13. SECCIÓN DE CONTACTO/UBICACIÓN (NUEVA) -->
+            <section id="ubicacion" class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12 fade-in-section">
+                        <h2 class="text-blue-600 font-semibold tracking-wide uppercase text-sm">Contáctanos</h2>
+                        <h3 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                            Solicita tu Pedido a Domicilio
+                        </h3>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                        <!-- Columna 1: Contacto Rápido -->
+                        <div class="lg:col-span-1 bg-gray-50 p-8 rounded-xl shadow-lg fade-in-section">
+                            <h4 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-address-book text-blue-500"></i> Información de Contacto</h4>
+                            <ul class="space-y-4 text-gray-600">
+                                <!-- Se eliminó la dirección física -->
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-solid fa-phone text-blue-500 text-xl"></i>
+                                    <a href="tel:+526561010854" class="hover:text-blue-700 font-semibold">(656) 101-0854</a>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-brands fa-whatsapp text-green-500 text-xl"></i>
+                                    <a href="https://wa.me/526561010854?text=Hola,%20me%20interesa%20información%20sobre%20sus%20productos" target="_blank" class="hover:text-green-700 font-semibold">Enviar WhatsApp</a>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-regular fa-clock text-blue-500 text-xl"></i>
+                                    <!-- Horario de entrega actualizado -->
+                                    <span class="font-semibold text-gray-800">Horario de Entregas:</span> 10:00 AM - 6:00 PM (Lunes a Sábado)
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Columna 2: Mensaje de Entrega a Domicilio (Reemplazo del Mapa) -->
+                        <div class="lg:col-span-2 rounded-xl shadow-xl overflow-hidden fade-in-section bg-blue-600 flex items-center justify-center text-white p-10" style="transition-delay: 150ms;">
+                            <div class="text-center">
+                                <i class="fa-solid fa-truck-fast text-6xl mb-4"></i>
+                                <h4 class="text-3xl font-bold mb-3">¡Solo Entregas a Domicilio!</h4>
+                                <p class="text-xl font-light">Llevamos la nueva era de la limpieza directamente a tu puerta, sin costo adicional. Haz tu pedido por WhatsApp o teléfono.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
         </div>
+    </div>
+    
+    <!-- 14. BOTONES FLOTANTES DE CONTACTO (WHATSAPP y TELÉFONO) -->
+    <div class="floating-container">
+        <!-- Botón de Teléfono (el más bajo) -->
+        <a href="tel:+526561010854" class="floating-btn btn-phone" title="Llamar por teléfono">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        
+        <!-- Botón de WhatsApp (el más alto) -->
+        <a href="https://wa.me/526561010854?text=Hola,%20quisiera%20hacer%20una%20consulta%20sobre%20el%20catálogo." target="_blank" class="floating-btn btn-whatsapp" title="Enviar mensaje por WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
     </div>
 
     <script>
         // Lógica del carrusel para cambiar imágenes automáticamente
-        document.addEventListener('DOMContentLoaded', () => {
+        window.onload = function () {
+            // Selecciona todas las diapositivas del carrusel
             const slides = document.querySelectorAll('.carousel-slide');
+            
+            // Si no se encuentran diapositivas, se detiene la ejecución para evitar errores.
+            if (slides.length === 0) {
+                console.error("Carousel: No slides found.");
+                return; // Sale de la función si no hay slides.
+            }
+            
             let currentSlide = 0;
             const totalSlides = slides.length;
             const intervalTime = 3000; // 3000 ms = 3 segundos
@@ -327,7 +711,7 @@
 
             // Configura el intervalo para el cambio automático cada 3 segundos
             setInterval(nextSlide, intervalTime);
-        });
+        };
     </script>
 </body>
 </html>
