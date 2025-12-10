@@ -9,7 +9,7 @@
     
     <!-- Fuente Montserrat desde Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- Iconos de Font Awesome (Añadido para el ícono de Visión, Misión y Valores y WhatsApp) -->
+    <!-- Iconos de Font Awesome (Añadido para el ícono de Visión, Misión y Valores, WhatsApp y Facebook) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <!-- Script para cargar Tailwind CSS para estilos rápidos -->
@@ -38,7 +38,7 @@
             flex-direction: column; /* Aseguramos que los elementos fluyan verticalmente */
         }
         
-        /* Estilo para la barra de desplazamiento horizontal oculta */
+        /* Estilo para la barra de desplazamiento horizontal oculta (para otras secciones) */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -56,7 +56,6 @@
             }
             50% {
                 transform: translateY(-20px); /* Altura del rebote: 20px */
-                /* Función de temporización que acelera al inicio, simula subida */
                 animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
             }
         }
@@ -104,6 +103,72 @@
         .btn-phone {
             background-color: #3b82f6; /* Azul de Tailwind 500 */
         }
+        
+        /* ------------------------------------------------------------------------ */
+
+        /* ======================================================================== */
+        /* --- ESTILOS DE LA ETIQUETA DE PRECIO (EXISTENTE) --- */
+        /* ======================================================================== */
+
+        .etiqueta-precio {
+            position: absolute; /* Permite moverlo libremente dentro del contenedor relativo */
+            top: 10px;          /* Distancia desde arriba */
+            right: 10px;        /* Distancia desde la derecha */
+            
+            background-color: #1D4ED8; /* Azul oscuro (blue-700) para combinar con el logo */
+            color: white;       /* Color del texto */
+            font-weight: 700;   /* Negrita */
+            
+            padding: 6px 14px;  /* Espacio interior para crear la forma ovalada */
+            border-radius: 50px; /* Bordes muy redondos para el efecto óvalo */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Una pequeña sombra para profundidad */
+            z-index: 10;        /* Asegura que aparezca encima de la imagen */
+            font-size: 0.9em;   /* Tamaño de letra */
+            /* Agregamos una animación sutil para que sea más llamativa */
+            animation: pulse 2s infinite; 
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        /* ------------------------------------------------------------------------ */
+        
+        /* ======================================================================== */
+        /* --- ESTILOS: BARRA DESPLAZADORA AZUL (PARA LA SECCIÓN DE COMBOS) --- */
+        /* ======================================================================== */
+
+        /* 1. Estilo para el área total de la barra de desplazamiento en la sección de combos */
+        .combo-scroll-bar::-webkit-scrollbar {
+            height: 12px; /* El grosor/altura de la barra */
+        }
+
+        /* 2. Estilo para el 'riél' o fondo de la barra en la sección de combos */
+        .combo-scroll-bar::-webkit-scrollbar-track {
+            background: #e5e7eb; /* Gris claro como fondo */
+            border-radius: 10px;
+        }
+
+        /* 3. Estilo para el 'pulgar' o parte que se mueve (la barra azul) */
+        .combo-scroll-bar::-webkit-scrollbar-thumb {
+            background-color: #3b82f6; /* Azul que contrasta (blue-500) */
+            border-radius: 10px;
+            border: 2px solid #e5e7eb; /* Borde interior para que se vea más definida */
+        }
+
+        /* 4. Estilo al pasar el ratón para feedback visual */
+        .combo-scroll-bar::-webkit-scrollbar-thumb:hover {
+            background-color: #2563eb; /* Azul más oscuro al pasar el ratón (blue-600) */
+        }
+        
+        /* Adaptación para dispositivos móviles, donde el espacio es limitado */
+        @media (max-width: 768px) {
+            .combo-scroll-bar::-webkit-scrollbar {
+                height: 8px; /* Hace la barra un poco más delgada en móvil */
+            }
+        }
+        
         /* ------------------------------------------------------------------------ */
     </style>
 </head>
@@ -126,25 +191,26 @@
             
             <!-- 2. CARRUSEL DE IMÁGENES -->
             <div id="carousel-slides" class="relative w-full h-[calc(100vh-64px)] overflow-hidden bg-gray-100">
-                <!-- Imagen 1 -->
-                <img src="https://i.imgur.com/0YB0bse.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" data-index="0" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Trapeadores';" alt="Trapeadores y cubetas de limpieza">
-                <!-- Imagen 2 -->
-                <img src="https://i.imgur.com/eRIr8GZ.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" data-index="1" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Escobas';" alt="Escobas y plumeros">
-                <!-- Imagen 3 -->
-                <img src="https://i.imgur.com/U863lfj.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" data-index="2" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Productos';" alt="Productos de limpieza variados">
-                <!-- Imagen 4 -->
-                <img src="https://i.imgur.com/Mwgx4zd.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" data-index="3" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Esponjas';" alt="Esponjas y cepillos">
-                <!-- Imagen 5 -->
-                <img src="https://i.imgur.com/3TCP76u.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" data-index="4" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Equipo';" alt="Equipo de limpieza profesional">
+                <!-- Imagen 1: CAMBIADO object-cover por object-contain -->
+                <img src="https://i.imgur.com/0YB0bse.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 opacity-100" data-index="0" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Trapeadores';" alt="Trapeadores y cubetas de limpieza">
+                <!-- Imagen 2: CAMBIADO object-cover por object-contain -->
+                <img src="https://i.imgur.com/eRIr8GZ.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" data-index="1" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Escobas';" alt="Escobas y plumeros">
+                <!-- Imagen 3: CAMBIADO object-cover por object-contain -->
+                <img src="https://i.imgur.com/U863lfj.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" data-index="2" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Productos';" alt="Productos de limpieza variados">
+                <!-- Imagen 4: CAMBIADO object-cover por object-contain -->
+                <img src="https://i.imgur.com/Mwgx4zd.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" data-index="3" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Esponjas';" alt="Esponjas y cepillos">
+                <!-- Imagen 5: CAMBIADO object-cover por object-contain -->
+                <img src="https://i.imgur.com/3TCP76u.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" data-index="4" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Equipo';" alt="Equipo de limpieza profesional">
             </div>
 
-            <!-- 2.5 LOGO REBOTANDO -->
+            <!-- 2.5 LOGO REBOTANDO (Ajustado a cuadrado y pequeño: w-48 h-48) -->
             <div class="py-12 md:py-16 flex justify-center items-center bg-gray-50 border-b border-gray-200">
-                <!-- El filtro drop-shadow ayuda a que el logo se vea mejor sobre fondos claros y simula un poco el rebote -->
-                <img src="https://i.imgur.com/r2mDTzK.png" 
-                     alt="Logo animado de la empresa NextGen" 
-                     class="w-32 h-32 md:w-48 md:h-48 object-contain bouncing-logo shadow-2xl rounded-full"
+                <!-- Se ajusta a w-48 h-48 para que sea un cuadrado de tamaño fijo -->
+                <img src="https://i.imgur.com/v3D3cv6.jpeg" 
+                     alt="Representación de un hogar limpio y moderno con productos de limpieza NextGen" 
+                     class="w-48 h-48 object-cover bouncing-logo shadow-2xl rounded-lg"
                      style="filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));"
+                     onerror="this.onerror=null; this.src='https://placehold.co/192x192/5B83E9/ffffff?text=Imagen+de+Limpieza';"
                      >
             </div>
             
@@ -169,10 +235,13 @@
                     </div>
 
                     <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
                     <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
                         
-                        <!-- Tarjeta 1 (Modelo Clásico) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 1 (Modelo Clásico) - PRECIO: $220 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$220</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
                                 <!-- Imagen real 1 -->
                                 <img src="https://i.imgur.com/1G841Vo.jpeg" alt="Trapeador Modelo Clásico" class="w-full h-full object-cover">
@@ -182,8 +251,10 @@
                             </div>
                         </div>
                         
-                        <!-- Tarjeta 2 (Microfibra Pro) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 2 (Microfibra Pro) - PRECIO: $220 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$220</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
                                 <!-- Imagen real 2 -->
                                 <img src="https://i.imgur.com/U1LHk4W.jpeg" alt="Trapeador Microfibra Pro" class="w-full h-full object-cover">
@@ -193,19 +264,23 @@
                             </div>
                         </div>
 
-                        <!-- Tarjeta 3 (Sistema Giratorio) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 3 (Sistema Giratorio) - PRECIO: $220 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$220</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
                                 <!-- Imagen real 3 -->
                                 <img src="https://i.imgur.com/l6Elvc2.jpeg" alt="Trapeador Sistema Giratorio" class="w-full h-full object-cover">
                             </div>
                             <div class="p-3 text-center">
-                                <p class="text-sm text-gray-500 mt-1">Incorpora un bastón largo para acceder a lugares difíciles. Su bastón de 1.37m reduce dolores lumbares evitando malas postueras.</p>
+                                <p class="text-sm text-gray-500 mt-1">Incorpora un bastón largo para acceder a lugares difíciles. Su bastón de 1.37m reduce dolores lumbares evitando malas posturas.</p>
                             </div>
                         </div>
 
-                        <!-- Tarjeta 4 (Repuestos Industriales) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 4 (Repuestos Industriales) - PRECIO: $220 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$220</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
                                 <!-- Imagen real 4 -->
                                 <img src="https://i.imgur.com/fL2ct0o.jpeg" alt="Trapeador Repuestos Industriales" class="w-full h-full object-cover">
@@ -246,31 +321,40 @@
                     </div>
 
                     <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
                     <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
                         
-                        <!-- Tarjeta 1 (Cubeta 1) - SIN TEXTO INFERIOR -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 1 (Cubeta 1) - PRECIO: $180 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$180</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/czY6SYk.jpeg" alt="Cubeta de color gris profesional" class="w-full h-full object-cover">
                             </div>
                         </div>
                         
-                        <!-- Tarjeta 2 (Cubeta 2) - SIN TEXTO INFERIOR -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 2 (Cubeta 2) - PRECIO: $180 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$180</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/0M7mEGG.jpeg" alt="Cubeta con escurridor amarillo" class="w-full h-full object-cover">
                             </div>
                         </div>
 
-                        <!-- Tarjeta 3 (Cubeta 3) - SIN TEXTO INFERIOR -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 3 (Cubeta 3) - PRECIO: $180 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$180</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/OulZxLs.jpeg" alt="Cubeta industrial de gran capacidad" class="w-full h-full object-cover">
                             </div>
                         </div>
 
-                        <!-- Tarjeta 4 (Cubeta 4) - SIN TEXTO INFERIOR -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 4 (Cubeta 4) - PRECIO: $180 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$180</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/HcIVZYL.jpeg" alt="Juego de cubetas de colores" class="w-full h-full object-cover">
                             </div>
@@ -297,24 +381,31 @@
                     </div>
 
                     <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
                     <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
                         
-                        <!-- Tarjeta 1 (Escoba 1) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 1 (Escoba 1) - PRECIO: $180 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$180</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/hJO6Et0.jpeg" alt="Escoba de exterior" class="w-full h-full object-cover">
                             </div>
                         </div>
                         
-                        <!-- Tarjeta 2 (Escoba 2) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 2 (Escoba 2) - PRECIO: $180 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$180</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/ayejAr2.jpeg" alt="Escoba de interiores con recogedor" class="w-full h-full object-cover">
                             </div>
                         </div>
 
-                        <!-- Tarjeta 3 (Escoba 3) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 3 (Escoba 3) - PRECIO: $180 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$180</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/deC8slt.jpeg" alt="Cepillo de mango corto" class="w-full h-full object-cover">
                             </div>
@@ -350,24 +441,31 @@
                     </div>
 
                     <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
                     <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
                         
-                        <!-- Tarjeta 1 (Recogedor 1) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 1 (Recogedor 1) - PRECIO: $180 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$180</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/MbchD0x.jpeg" alt="Recogedor 1" class="w-full h-full object-cover">
                             </div>
                         </div>
                         
-                        <!-- Tarjeta 2 (Recogedor 2) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 2 (Recogedor 2) - PRECIO: $180 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$180</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/ThOIC3a.jpeg" alt="Recogedor 2" class="w-full h-full object-cover">
                             </div>
                         </div>
 
-                        <!-- Tarjeta 3 (Recogedor 3) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 3 (Recogedor 3) - PRECIO: $180 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$180</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/QCRPZll.jpeg" alt="Recogedor 3" class="w-full h-full object-cover">
                             </div>
@@ -386,7 +484,7 @@
                         </div>
                         <p class="mt-4 text-lg text-gray-600 max-w-3xl">
                             Trapos de <span class="font-bold text-lg text-blue-700">microfibra</span> super absorbente para todo tipo de superficie. No rayan y son ideales para superficies delicadas.
-                            <!-- Precio fijo agregado para Paños de Microfibra -->
+                            <!-- Precio por unidad: $40 -->
                             <span class="font-bold text-lg text-blue-700">Precio por unidad:</span> 
                             <span class="font-extrabold text-xl text-green-600">$40</span>. 
                             Disponibles en paquetes de 5.
@@ -394,17 +492,22 @@
                     </div>
 
                     <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
                     <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
                         
-                        <!-- Tarjeta 1 (Paño 1) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 1 (Paño 1) - PRECIO: $40 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$40</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/Ndy20BV.jpeg" alt="Paño de microfibra 1" class="w-full h-full object-cover">
                             </div>
                         </div>
                         
-                        <!-- Tarjeta 2 (Paño 2) -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <!-- Tarjeta 2 (Paño 2) - PRECIO: $40 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$40</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
                                 <img src="https://i.imgur.com/RXQUZsc.jpeg" alt="Paño de microfibra 2" class="w-full h-full object-cover">
                             </div>
@@ -427,68 +530,114 @@
                     </div>
 
                     <!-- Contenedor Deslizable Horizontal (Scrollable) -->
-                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+                    <!-- CLASE combo-scroll-bar APLICADA PARA EL SCROLL AZUL -->
+                    <div class="flex overflow-x-auto gap-6 pb-4 combo-scroll-bar">
                         
                         <!-- Tarjeta 1 (Combo piso limpio) - PRECIO: $400 -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
-                                <img src="https://i.imgur.com/szcWai9.jpeg" alt="Paquete de Trapeador, Cubeta, Escoba y Paños" class="w-full h-full object-cover">
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                            <div>
+                                <!-- ETIQUETA DE PRECIO APLICADA -->
+                                <div class="etiqueta-precio">$400</div>
+                                <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                    <img src="https://i.imgur.com/szcWai9.jpeg" alt="Paquete de Trapeador, Cubeta, Escoba y Paños" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-3 text-center">
+                                    <p class="font-bold text-gray-800">Piso Limpio</p>
+                                    <p class="text-sm text-gray-500 mt-1">Kit esencial: incluye trapeador de microfibra y cubeta ergonómica con exprimidor. 
+                                        <span class="font-extrabold text-lg text-green-600">$400</span></p>
+                                </div>
                             </div>
-                            <div class="p-3 text-center">
-                                <p class="font-bold text-gray-800">Piso Limpio</p>
-                                <p class="text-sm text-gray-500 mt-1">Kit esencial: incluye trapeador de microfibra y cubeta ergonómica con exprimidor. 
-                                    <span class="font-extrabold text-lg text-green-600">$400</span></p>
-                            </div>
+                            <!-- Botón de Pedido WhatsApp -->
+                            <a href="https://wa.me/526561010854?text=Hola,%20quiero%20pedir%20el%20combo%20Piso%20Limpio" target="_blank"
+                               class="m-3 mt-0 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300 text-sm flex items-center justify-center shadow-md">
+                                <i class="fa-brands fa-whatsapp mr-2"></i> Pedir Ahora
+                            </a>
                         </div>
                         
                         <!-- Tarjeta 2 (Combo barrido completo) - PRECIO: $360 -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
-                                <img src="https://i.imgur.com/eVDq2dS.jpeg" alt="Kit de limpieza para pisos sensibles" class="w-full h-full object-cover">
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                            <div>
+                                <!-- ETIQUETA DE PRECIO APLICADA -->
+                                <div class="etiqueta-precio">$360</div>
+                                <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                    <img src="https://i.imgur.com/eVDq2dS.jpeg" alt="Kit de limpieza para pisos sensibles" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-3 text-center">
+                                    <p class="font-bold text-gray-800">barrido completo</p>
+                                    <p class="text-sm text-gray-500 mt-1">Ideal para madera, laminado y mármol. Incluye escoba con bastón largo ergonómico premium y recogedor ergonómico que facilita el agarre. 
+                                        <span class="font-extrabold text-lg text-green-600">$360</span></p>
+                                </div>
                             </div>
-                            <div class="p-3 text-center">
-                                <p class="font-bold text-gray-800">barrido completo</p>
-                                <p class="text-sm text-gray-500 mt-1">Ideal para madera, laminado y mármol. Incluye escoba con bastón largo ergonómico premium y recogedor ergonómico que facilita el agarre. 
-                                    <span class="font-extrabold text-lg text-green-600">$360</span></p>
-                            </div>
+                            <!-- Botón de Pedido WhatsApp -->
+                            <a href="https://wa.me/526561010854?text=Hola,%20quiero%20pedir%20el%20combo%20barrido%20completo" target="_blank"
+                               class="m-3 mt-0 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300 text-sm flex items-center justify-center shadow-md">
+                                <i class="fa-brands fa-whatsapp mr-2"></i> Pedir Ahora
+                            </a>
                         </div>
 
                         <!-- Tarjeta 3 (Combo hogar completo) - PRECIO: $550 -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
-                                <img src="https://i.imgur.com/znieg3S.jpeg" alt="Kit de cepillos y esponjas para cocina y baño" class="w-full h-full object-cover">
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                            <div>
+                                <!-- ETIQUETA DE PRECIO APLICADA -->
+                                <div class="etiqueta-precio">$550</div>
+                                <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                    <img src="https://i.imgur.com/znieg3S.jpeg" alt="Kit de cepillos y esponjas para cocina y baño" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-3 text-center">
+                                    <p class="font-bold text-gray-800">Hogar completo</p>
+                                    <p class="text-sm text-gray-500 mt-1">Paquete especializado que incluye escoba ergonómica, trapeador con baston de 1.37m y cubeta con exprimidor.
+                                        <span class="font-extrabold text-lg text-green-600">$550</span></p>
+                                </div>
                             </div>
-                            <div class="p-3 text-center">
-                                <p class="font-bold text-gray-800">Hogar completo</p>
-                                <p class="text-sm text-gray-500 mt-1">Paquete especializado que incluye escoba ergonómica, trapeador con baston de 1.37m y cubeta con exprimidor.
-                                    <span class="font-extrabold text-lg text-green-600">$550</span></p>
-                            </div>
+                            <!-- Botón de Pedido WhatsApp -->
+                            <a href="https://wa.me/526561010854?text=Hola,%20quiero%20pedir%20el%20combo%20Hogar%20completo" target="_blank"
+                               class="m-3 mt-0 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300 text-sm flex items-center justify-center shadow-md">
+                                <i class="fa-brands fa-whatsapp mr-2"></i> Pedir Ahora
+                            </a>
                         </div>
 
                         <!-- Tarjeta 4 (limpieza total) - PRECIO: $700 -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
-                                <!-- Enlace Corregido -->
-                                <img src="https://i.imgur.com/rwtuENr.jpeg" alt="Kit de limpieza industrial y profesional" class="w-full h-full object-cover">
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                            <div>
+                                <!-- ETIQUETA DE PRECIO APLICADA -->
+                                <div class="etiqueta-precio">$700</div>
+                                <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                    <!-- Enlace Corregido -->
+                                    <img src="https://i.imgur.com/rwtuENr.jpeg" alt="Kit de limpieza industrial y profesional" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-3 text-center">
+                                    <p class="font-bold text-gray-800">Limpieza Total</p>
+                                    <p class="text-sm text-gray-500 mt-1">Equipado con escoba de pelo de angel, trapeador ergonómico, cubeta con exprimidor y recogedor premium.
+                                        <span class="font-extrabold text-lg text-green-600">$700</span></p>
+                                </div>
                             </div>
-                            <div class="p-3 text-center">
-                                <p class="font-bold text-gray-800">Limpieza Total</p>
-                                <p class="text-sm text-gray-500 mt-1">Equipado con escoba de pelo de angel, trapeador ergonómico, cubeta con exprimidor y recogedor premium.
-                                    <span class="font-extrabold text-lg text-green-600">$700</span></p>
-                            </div>
+                            <!-- Botón de Pedido WhatsApp -->
+                            <a href="https://wa.me/526561010854?text=Hola,%20quiero%20pedir%20el%20combo%20Limpieza%20Total" target="_blank"
+                               class="m-3 mt-0 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300 text-sm flex items-center justify-center shadow-md">
+                                <i class="fa-brands fa-whatsapp mr-2"></i> Pedir Ahora
+                            </a>
                         </div>
                         
-                        <!-- Tarjeta 5 (Combo Barrer y Trapear) - PRECIO: $500 -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
-                                <!-- Enlace Corregido -->
-                                <img src="https://i.imgur.com/i1fOvoZ.jpeg" alt="Kit de limpieza ecológico" class="w-full h-full object-cover">
+                        <!-- Tarjeta 5 (Combo Barrer y Trapear) - PRECIO: $400 -->
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                            <div>
+                                <!-- ETIQUETA DE PRECIO APLICADA -->
+                                <div class="etiqueta-precio">$400</div>
+                                <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+                                    <!-- Enlace Corregido -->
+                                    <img src="https://i.imgur.com/i1fOvoZ.jpeg" alt="Kit de limpieza ecológico" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-3 text-center">
+                                    <p class="font-bold text-gray-800">Barrer y trapear</p>
+                                    <p class="text-sm text-gray-500 mt-1">incluye escoba y trapeador, cada uno con mango ergonómico y bastón de 1.37 metros para evitar dolores lumbares.
+                                        <span class="font-extrabold text-lg text-green-600">$400</span></p>
+                                </div>
                             </div>
-                            <div class="p-3 text-center">
-                                <p class="font-bold text-gray-800">Barrer y trapear</p>
-                                <p class="text-sm text-gray-500 mt-1">incluye escoba y trapeador, cada uno con mango ergonómico y bastón de 1.37 metros para evitar dolores lumbares.
-                                    <span class="font-extrabold text-lg text-green-600">$400</span></p>
-                            </div>
+                            <!-- Botón de Pedido WhatsApp -->
+                            <a href="https://wa.me/526561010854?text=Hola,%20quiero%20pedir%20el%20combo%20Barrer%20y%20trapear" target="_blank"
+                               class="m-3 mt-0 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300 text-sm flex items-center justify-center shadow-md">
+                                <i class="fa-brands fa-whatsapp mr-2"></i> Pedir Ahora
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -508,10 +657,13 @@
                     </div>
 
                     <!-- Contenedor Deslizable Horizontal (Scrollable) -->
+                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
                     <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
                         
                         <!-- Tarjeta 1 (Minisplit Inverter) - PRECIO: $6,600 -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$6,600</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
                                 <img src="https://i.imgur.com/Rbj4AwJ.jpeg" alt="Minisplit con tecnología Inverter" class="w-full h-full object-cover">
                             </div>
@@ -523,7 +675,9 @@
                         </div>
                         
                         <!-- Tarjeta 2 (Minisplit Estándar) - PRECIO: $5,500 -->
-                        <div class="flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                             <!-- ETIQUETA DE PRECIO APLICADA -->
+                            <div class="etiqueta-precio">$5,500</div>
                             <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
                                 <img src="https://i.imgur.com/4kjUDHf.jpeg" alt="Minisplit Estándar" class="w-full h-full object-cover">
                             </div>
@@ -539,13 +693,34 @@
                 </div>
             </section>
             
-            <!-- 10. SECCIÓN DE VISIÓN -->
-            <section id="vision" class="py-16 bg-blue-50">
+            <!-- 10. SECCIÓN DE MISIÓN (NUEVA POSICIÓN) -->
+            <section id="mision" class="py-16 bg-gray-50">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section" style="transition-delay: 200ms;">
+                    <h2 class="text-blue-700 font-semibold tracking-wide uppercase text-sm mb-3">Nuestro Compromiso</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
+                        <!-- Imagen de la Misión - Usa la imagen de interiores -->
+                        <img src="https://i.imgur.com/v3D3cv6.jpeg" 
+                             alt="Representación de un hogar limpio y moderno con productos de limpieza NextGen" 
+                             class="w-full h-auto rounded-xl -mt-6 mb-6 shadow-lg border-4 border-gray-200 transform hover:scale-[1.01] transition duration-300"
+                             onerror="this.onerror=null; this.src='https://placehold.co/800x200/5B83E9/ffffff?text=Misión+NextGen+Limpieza';"
+                             loading="lazy">
+                        <h3 class="mt-0 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 mb-4 flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-handshake-angle text-blue-600"></i> Misión
+                        </h3>
+                        <p class="mt-4 text-lg text-gray-600 italic">
+                            Ofrecer a nuestros clientes los instrumentos de limpieza más avanzados y de la más alta calidad. Nuestro compromiso es superar las expectativas de nuestros clientes con productos que garantizan resultados impecables, duraderos y que aportan valor real al hogar, negocios y empresas.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. SECCIÓN DE VISIÓN (NUEVA POSICIÓN) -->
+            <section id="vision" class="py-16 bg-white">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section">
                     <h2 class="text-blue-700 font-semibold tracking-wide uppercase text-sm mb-3">Nuestra Meta</h2>
-                    <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
-                        <!-- Imagen de la Visión -->
-                        <img src="https://i.imgur.com/v3D3cv6.jpeg" 
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
+                        <!-- Imagen de la Visión - Usa la misma imagen de interiores -->
+                        <img src="https://i.imgur.com/eNjDv0o.jpeg" 
                              alt="Representación de un hogar limpio y moderno con productos de limpieza NextGen" 
                              class="w-full h-auto rounded-xl -mt-6 mb-6 shadow-lg border-4 border-white transform hover:scale-[1.01] transition duration-300"
                              onerror="this.onerror=null; this.src='https://placehold.co/800x200/5B83E9/ffffff?text=Visión+NextGen+Limpieza';"
@@ -560,28 +735,7 @@
                 </div>
             </section>
             
-            <!-- 11. SECCIÓN DE MISIÓN (Agregada después de Visión) -->
-            <section id="mision" class="py-16 bg-white">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section" style="transition-delay: 200ms;">
-                    <h2 class="text-blue-700 font-semibold tracking-wide uppercase text-sm mb-3">Nuestro Compromiso</h2>
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
-                        <!-- Imagen de la Misión -->
-                        <img src="https://i.imgur.com/eNjDv0o.jpeg" 
-                             alt="Primer plano de personas estrechando manos, representando compromiso y calidad" 
-                             class="w-full h-auto rounded-xl -mt-6 mb-6 shadow-lg border-4 border-gray-200 transform hover:scale-[1.01] transition duration-300"
-                             onerror="this.onerror=null; this.src='https://placehold.co/800x200/5B83E9/ffffff?text=Misión+NextGen+Limpieza';"
-                             loading="lazy">
-                        <h3 class="mt-0 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 mb-4 flex items-center justify-center gap-3">
-                            <i class="fa-solid fa-handshake-angle text-blue-600"></i> Misión
-                        </h3>
-                        <p class="mt-4 text-lg text-gray-600 italic">
-                            Ofrecer a nuestros clientes los instrumentos de limpieza más avanzados y de la más alta calidad. Nuestro compromiso es superar las expectativas de nuestros clientes con productos que garantizan resultados impecables, duraderos y que aportan valor real al hogar, negocios y empresas.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 12. SECCIÓN DE VALORES (Agregada después de Misión) -->
+            <!-- 12. SECCIÓN DE VALORES (Mantiene su posición) -->
             <section id="valores" class="py-16 bg-blue-50">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section" style="transition-delay: 300ms;">
                     <h2 class="text-blue-700 font-semibold tracking-wide uppercase text-sm mb-3">Principios Fundamentales</h2>
@@ -615,7 +769,7 @@
                 </div>
             </section>
 
-            <!-- 13. SECCIÓN DE CONTACTO/UBICACIÓN (NUEVA) -->
+            <!-- 13. SECCIÓN DE CONTACTO/UBICACIÓN (Mantiene su posición) -->
             <section id="ubicacion" class="py-20 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12 fade-in-section">
@@ -629,7 +783,6 @@
                         <div class="lg:col-span-1 bg-gray-50 p-8 rounded-xl shadow-lg fade-in-section">
                             <h4 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-address-book text-blue-500"></i> Información de Contacto</h4>
                             <ul class="space-y-4 text-gray-600">
-                                <!-- Se eliminó la dirección física -->
                                 <li class="flex items-center gap-3">
                                     <i class="fa-solid fa-phone text-blue-500 text-xl"></i>
                                     <a href="tel:+526561010854" class="hover:text-blue-700 font-semibold">(656) 101-0854</a>
@@ -637,6 +790,11 @@
                                 <li class="flex items-center gap-3">
                                     <i class="fa-brands fa-whatsapp text-green-500 text-xl"></i>
                                     <a href="https://wa.me/526561010854?text=Hola,%20me%20interesa%20información%20sobre%20sus%20productos" target="_blank" class="hover:text-green-700 font-semibold">Enviar WhatsApp</a>
+                                </li>
+                                <!-- --- ENLACE: FACEBOOK (Se mantiene en la sección de contacto) --- -->
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-brands fa-facebook text-blue-700 text-xl"></i>
+                                    <a href="https://www.facebook.com/story.php?story_fbid=122137154312376217&id=61561286513992&rdid=6KBITWwR25AwmeBb#" target="_blank" class="hover:text-blue-900 font-semibold">Ver en Facebook</a>
                                 </li>
                                 <li class="flex items-center gap-3">
                                     <i class="fa-regular fa-clock text-blue-500 text-xl"></i>
@@ -650,7 +808,7 @@
                             <div class="text-center">
                                 <i class="fa-solid fa-truck-fast text-6xl mb-4"></i>
                                 <h4 class="text-3xl font-bold mb-3">¡Solo Entregas a Domicilio!</h4>
-                                <p class="text-xl font-light">Llevamos la nueva era de la limpieza directamente a tu puerta, sin costo adicional en la compra de dos artículos o más o en la compra de cualquier combo. Tarifa de $50 en la compra de un solo producto. Haz tu pedido por WhatsApp o teléfono.</p>
+                                <p class="text-xl font-light">Llevamos la nueva era de la limpieza directamente a tu puerta, sin costo adicional en la compra de dos artículos o más o en la compra de cualquier combo. Tarifa de $50 en la compra de un solo producto. Haz tu pedido por WhatsApp, teléfono o síguenos en Facebook.</p>
                             </div>
                         </div>
                     </div>
@@ -660,16 +818,16 @@
         </div>
     </div>
     
-    <!-- 14. BOTONES FLOTANTES DE CONTACTO (WHATSAPP y TELÉFONO) -->
+    <!-- 14. BOTONES FLOTANTES DE CONTACTO (WHATSAPP, TELÉFONO) -->
     <div class="floating-container">
+        <!-- Botón de WhatsApp (el medio) -->
+        <a href="https://wa.me/526561010854?text=Hola,%20quisiera%20hacer%20una%20consulta%20sobre%20el%20catálogo." target="_blank" class="floating-btn btn-whatsapp" title="Enviar mensaje por WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+
         <!-- Botón de Teléfono (el más bajo) -->
         <a href="tel:+526561010854" class="floating-btn btn-phone" title="Llamar por teléfono">
             <i class="fa-solid fa-phone"></i>
-        </a>
-        
-        <!-- Botón de WhatsApp (el más alto) -->
-        <a href="https://wa.me/526561010854?text=Hola,%20quisiera%20hacer%20una%20consulta%20sobre%20el%20catálogo." target="_blank" class="floating-btn btn-whatsapp" title="Enviar mensaje por WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
         </a>
     </div>
 
