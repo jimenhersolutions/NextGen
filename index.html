@@ -1,520 +1,462 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Configuración inicial del documento -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Título de la página que aparece en la pestaña del navegador -->
-    <title>NextGen Limpieza</title>
-    
-    <!-- Fuente Montserrat desde Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- Iconos de Font Awesome (Añadido para el ícono de Visión, Misión y Valores, WhatsApp y Facebook) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
-    <!-- Script para cargar Tailwind CSS para estilos rápidos -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Estilos básicos para la nueva tipografía (Montserrat para títulos/logo, system-ui para cuerpo) */
-        body {
-            font-family: 'system-ui', sans-serif; /* Fuente del cuerpo para alta legibilidad */
-            min-height: 100vh;
-            background-color: #f7f7f7; /* Fondo gris claro */
-            margin: 0;
-            padding-top: 64px; /* Añade espacio en la parte superior para que el navbar fijo no tape el contenido */
-        }
-        
-        /* Aplicamos Montserrat específicamente al logo/título donde la usaremos */
-        .font-logo {
-            font-family: 'Montserrat', sans-serif;
-        }
+<!-- Configuración inicial del documento -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Título de la página que aparece en la pestaña del navegador -->
+<title>NextGen Limpieza</title>
+<!-- Fuente Montserrat desde Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<!-- Fuente Poppins para el Hero -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Iconos de Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!-- Script para cargar Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* Estilos básicos */
+body {
+font-family: 'system-ui', sans-serif;
+min-height: 100vh;
+background-color: #f7f7f7;
+margin: 0;
+padding-top: 64px;
+overflow-x: hidden;
+}
 
-        /* Contenedor central: quitamos el padding para que el carrusel sea full width */
-        #content-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Alineamos el contenido al inicio (arriba) */
-            width: 100%;
-            flex-direction: column; /* Aseguramos que los elementos fluyan verticalmente */
-        }
-        
-        /* Estilo para la barra de desplazamiento horizontal oculta (para otras secciones) */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
+.font-logo {
+font-family: 'Montserrat', sans-serif;
+}
 
-        /* ------------------ ANIMACIÓN DE REBOTE PARA EL LOGO ------------------ */
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-                /* Función de temporización que desacelera al inicio, simula caída */
-                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-            }
-            50% {
-                transform: translateY(-20px); /* Altura del rebote: 20px */
-                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-            }
-        }
+#content-wrapper {
+display: flex;
+justify-content: center;
+align-items: flex-start;
+width: 100%;
+flex-direction: column;
+}
 
-        .bouncing-logo {
-            animation: bounce 2s infinite; /* Aplica la animación cada 2 segundos, infinitamente */
-        }
-        /* ------------------------------------------------------------------------ */
+/* Animaciones Personalizadas del Hero */
+.fade-in-section {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+will-change: opacity, visibility;
+}
 
-        /* ------------------ ESTILOS PARA EL BOTÓN FLOTANTE DE CONTACTO ------------------ */
-        .floating-container {
-            position: fixed;
-            bottom: 20px; /* Separación del fondo */
-            right: 20px; /* Separación de la derecha */
-            z-index: 1000; /* Asegura que esté por encima de otros elementos */
-            display: flex;
-            flex-direction: column; /* Apila los botones verticalmente */
-            gap: 12px; /* Espacio entre los botones */
-        }
-        
-        .floating-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px; /* Tamaño del botón */
-            height: 60px;
-            border-radius: 50%; /* Forma circular */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease-in-out;
-            color: white; /* Color del ícono */
-            font-size: 28px; /* Tamaño del ícono */
-        }
+.fade-in-section.is-visible {
+opacity: 1;
+transform: none;
+}
 
-        .floating-btn:hover {
-            transform: scale(1.1); /* Ligero agrandamiento al pasar el mouse */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
-        }
+/* Efecto de onda en el Hero */
+.hero-bg {
+background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+position: relative;
+overflow: hidden;
+}
 
-        /* Estilo específico para WhatsApp (verde oficial) */
-        .btn-whatsapp {
-            background-color: #25D366; /* Verde de WhatsApp */
-        }
+.hero-shape {
+position: absolute;
+bottom: -1px;
+left: 0;
+width: 100%;
+overflow: hidden;
+line-height: 0;
+transform: rotate(180deg);
+}
 
-        /* Estilo específico para Teléfono (azul principal) */
-        .btn-phone {
-            background-color: #3b82f6; /* Azul de Tailwind 500 */
-        }
-        
-        /* ------------------------------------------------------------------------ */
+.hero-shape svg {
+position: relative;
+display: block;
+width: calc(100% + 1.3px);
+height: 60px;
+}
 
-        /* ======================================================================== */
-        /* --- ESTILOS DE LA ETIQUETA DE PRECIO (EXISTENTE) --- */
-        /* ======================================================================== */
+.hero-shape .shape-fill {
+fill: #FFFFFF;
+}
 
-        .etiqueta-precio {
-            position: absolute; /* Permite moverlo libremente dentro del contenedor relativo */
-            top: 10px;          /* Distancia desde arriba */
-            right: 10px;        /* Distancia desde la derecha */
-            
-            background-color: #1D4ED8; /* Azul oscuro (blue-700) para combinar con el logo */
-            color: white;       /* Color del texto */
-            font-weight: 700;   /* Negrita */
-            
-            padding: 6px 14px;  /* Espacio interior para crear la forma ovalada */
-            border-radius: 50px; /* Bordes muy redondos para el efecto óvalo */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Una pequeña sombra para profundidad */
-            z-index: 10;        /* Asegura que aparezca encima de la imagen */
-            font-size: 0.9em;   /* Tamaño de letra */
-            /* Agregamos una animación sutil para que sea más llamativa */
-            animation: pulse 2s infinite; 
-        }
+/* Ocultar scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+display: none;
+}
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        /* ------------------------------------------------------------------------ */
-        
-        /* ======================================================================== */
-        /* --- ESTILOS: BARRA DESPLAZADORA AZUL (PARA LA SECCIÓN DE COMBOS) --- */
-        /* ======================================================================== */
+.no-scrollbar {
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
 
-        /* 1. Estilo para el área total de la barra de desplazamiento en la sección de combos */
-        .combo-scroll-bar::-webkit-scrollbar {
-            height: 12px; /* El grosor/altura de la barra */
-        }
+/* Animación de rebote para el logo */
+@keyframes bounce {
+0%, 100% {
+transform: translateY(0);
+animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+}
+50% {
+transform: translateY(-20px);
+animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+}
 
-        /* 2. Estilo para el 'riél' o fondo de la barra en la sección de combos */
-        .combo-scroll-bar::-webkit-scrollbar-track {
-            background: #e5e7eb; /* Gris claro como fondo */
-            border-radius: 10px;
-        }
+.bouncing-logo {
+animation: bounce 2s infinite;
+}
 
-        /* 3. Estilo para el 'pulgar' o parte que se mueve (la barra azul) */
-        .combo-scroll-bar::-webkit-scrollbar-thumb {
-            background-color: #3b82f6; /* Azul que contrasta (blue-500) */
-            border-radius: 10px;
-            border: 2px solid #e5e7eb; /* Borde interior para que se vea más definida */
-        }
+/* Botones Flotantes */
+.floating-container {
+position: fixed;
+bottom: 20px;
+right: 20px;
+z-index: 1000;
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
 
-        /* 4. Estilo al pasar el ratón para feedback visual */
-        .combo-scroll-bar::-webkit-scrollbar-thumb:hover {
-            background-color: #2563eb; /* Azul más oscuro al pasar el ratón (blue-600) */
-        }
-        
-        /* Adaptación para dispositivos móviles, donde el espacio es limitado */
-        @media (max-width: 768px) {
-            .combo-scroll-bar::-webkit-scrollbar {
-                height: 8px; /* Hace la barra un poco más delgada en móvil */
-            }
-        }
-        
-        /* ------------------------------------------------------------------------ */
-    </style>
+.floating-btn {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease-in-out;
+color: white;
+font-size: 28px;
+}
+
+.floating-btn:hover {
+transform: scale(1.1);
+box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-whatsapp {
+background-color: #25D366;
+animation: pulse-green 2s infinite;
+}
+
+.btn-phone {
+background-color: #3b82f6;
+}
+
+@keyframes pulse-green {
+0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Etiqueta de precio */
+.etiqueta-precio {
+position: absolute;
+top: 10px;
+right: 10px;
+background-color: #1D4ED8;
+color: white;
+font-weight: 700;
+padding: 6px 14px;
+border-radius: 50px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+z-index: 10;
+font-size: 0.9em;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0% { transform: scale(1); }
+50% { transform: scale(1.05); }
+100% { transform: scale(1); }
+}
+
+/* Barra desplazadora azul para combos */
+.combo-scroll-bar::-webkit-scrollbar {
+height: 12px;
+}
+
+.combo-scroll-bar::-webkit-scrollbar-track {
+background: #e5e7eb;
+border-radius: 10px;
+}
+
+.combo-scroll-bar::-webkit-scrollbar-thumb {
+background-color: #3b82f6;
+border-radius: 10px;
+border: 2px solid #e5e7eb;
+}
+
+.combo-scroll-bar::-webkit-scrollbar-thumb:hover {
+background-color: #2563eb;
+}
+
+@media (max-width: 768px) {
+.combo-scroll-bar::-webkit-scrollbar {
+height: 8px;
+}
+}
+</style>
 </head>
 <body>
-    <!-- 1. BARRA DE NAVEGACIÓN SUPERIOR (NAVBAR) -->
-    <!-- Ahora solo contiene el logo que es el enlace de inicio. -->
-    <nav class="fixed top-0 w-full h-16 bg-blue-50 shadow-md z-10 flex items-center px-4 md:px-8">
-        <!-- Logo como Enlace de Inicio -->
-        <a href="https://jimenhersolutions.github.io/NextGen/" class="flex items-center">
-            <div class="font-logo text-2xl font-extrabold text-blue-800 tracking-tight">
-                Next<span class="text-blue-400">Gen</span>
-            </div>
-        </a>
-    </nav>
 
-    <!-- Contenedor principal -->
-    <div id="content-wrapper">
-        <!-- Contenedor general que fluye -->
-        <div id="content-container" class="w-full">
-            
-            <!-- 2. CARRUSEL DE IMÁGENES -->
-            <div id="carousel-slides" class="relative w-full h-[calc(100vh-64px)] overflow-hidden bg-gray-100">
-                <!-- Imagen 1: CAMBIADO object-cover por object-contain -->
-                <img src="https://i.imgur.com/0YB0bse.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 opacity-100" data-index="0" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Trapeadores';" alt="Trapeadores y cubetas de limpieza">
-                <!-- Imagen 2: CAMBIADO object-cover por object-contain -->
-                <img src="https://i.imgur.com/eRIr8GZ.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" data-index="1" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Escobas';" alt="Escobas y plumeros">
-                <!-- Imagen 3: CAMBIADO object-cover por object-contain -->
-                <img src="https://i.imgur.com/U863lfj.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" data-index="2" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Productos';" alt="Productos de limpieza variados">
-                <!-- Imagen 4: CAMBIADO object-cover por object-contain -->
-                <img src="https://i.imgur.com/Mwgx4zd.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" data-index="3" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Esponjas';" alt="Esponjas y cepillos">
-                <!-- Imagen 5: CAMBIADO object-cover por object-contain -->
-                <img src="https://i.imgur.com/3TCP76u.jpeg" class="carousel-slide absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" data-index="4" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/38bdf8/ffffff?text=Equipo';" alt="Equipo de limpieza profesional">
-            </div>
+<!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+<nav class="fixed top-0 w-full h-16 bg-blue-50 shadow-md z-50 flex items-center px-4 md:px-8">
+<a href="https://jimenhersolutions.github.io/NextGen/" class="flex items-center">
+<div class="font-logo text-2xl font-extrabold text-blue-800 tracking-tight">
+Next<span class="text-blue-400">Gen</span>
+</div>
+</a>
+</nav>
 
-            <!-- 2.5 LOGO REBOTANDO (Ajustado a cuadrado y pequeño: w-48 h-48) -->
-            <div class="py-12 md:py-16 flex justify-center items-center bg-gray-50 border-b border-gray-200">
-                <!-- Se ajusta a w-48 h-48 para que sea un cuadrado de tamaño fijo -->
-                <img src="https://i.imgur.com/v3D3cv6.jpeg" 
-                     alt="Representación de un hogar limpio y moderno con productos de limpieza NextGen" 
-                     class="w-48 h-48 object-cover bouncing-logo shadow-2xl rounded-lg"
-                     style="filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));"
-                     onerror="this.onerror=null; this.src='https://placehold.co/192x192/5B83E9/ffffff?text=Imagen+de+Limpieza';"
-                     >
-            </div>
-            
-            <!-- 3. SECCIÓN DE PRODUCTOS: TRAPEADORES (Carrusel Horizontal) -->
-            <section id="trapeadores" class="py-16 bg-white">
-                <div class="max-w-7xl mx-auto px-4 md:px-8">
-                    <!-- Encabezado de la sección (estilo pestaña/título) -->
-                    <div class="flex flex-col items-start mb-6">
-                        <div class="inline-block border-b-4 border-blue-500 pb-2">
-                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Trapeadores</h2>
-                        </div>
-                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
-                            Trapeadores de 
-                            <span class="font-bold text-lg text-blue-700">Microfibra</span>
-                            española 100% originales. Descubre nuestra línea premium de trapeadores diseñados para máxima absorción y durabilidad. 
-                            Ideales para todo tipo de superficies, dejando tus pisos impecables con menos esfuerzo.
-                            <!-- Precio fijo agregado para Trapeadores -->
-                            <span class="font-bold text-lg text-blue-700">Precio unitario:</span> 
-                            <span class="font-extrabold text-xl text-green-600">$220</span>. 
-                            ¡Calidad garantizada!
-                        </p>
-                    </div>
+<!-- Contenedor principal -->
+<div id="content-wrapper">
+<div id="content-container" class="w-full">
 
-                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
-                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
-                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
-                        
-                        <!-- Tarjeta 1 (Modelo Clásico) - PRECIO: $220 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$220</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
-                                <!-- Imagen real 1 -->
-                                <img src="https://i.imgur.com/1G841Vo.jpeg" alt="Trapeador Modelo Clásico" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-3 text-center">
-                                <p class="text-sm text-gray-500 mt-1">Elaborado con microfibra de alta densidad, garantiza una absorción superior. Su mango resistente y ergonómico es ideal para uso diario y limpieza profunda.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Tarjeta 2 (Microfibra Pro) - PRECIO: $220 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$220</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
-                                <!-- Imagen real 2 -->
-                                <img src="https://i.imgur.com/U1LHk4W.jpeg" alt="Trapeador Microfibra Pro" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-3 text-center">
-                                <p class="text-sm text-gray-500 mt-1">Diseño de microfibra que atrapa el 99% de las bacterias. Ideal para pisos delicados (madera, laminados) y perfecto para usarse en seco o húmedo, sin dejar residuos.</p>
-                            </div>
-                        </div>
+<!-- NUEVA SECCIÓN HERO (REEMPLAZA EL CARRUSEL) -->
+<section id="inicio" class="hero-bg pt-32 pb-40 px-4 sm:px-6 lg:px-8 relative text-white text-center md:text-left" style="font-family: 'Poppins', sans-serif;">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 fade-in-section is-visible">
+<h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+Limpieza Avanzada para el <br> <span class="text-blue-200">Mundo Moderno</span>
+</h1>
+<p class="text-lg md:text-xl text-blue-100 mb-8 max-w-lg mx-auto md:mx-0">
+Descubre la calidad superior de NextGen. Todo lo que necesitas en un solo lugar.
+</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+<a href="#trapeadores" class="bg-white text-blue-600 px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-100 transition transform hover:-translate-y-1">
+Ver Catálogo
+</a>
+<a href="https://wa.me/526561010854?text=Hola,%20quiero%20hacer%20un%20pedido" target="_blank" class="bg-green-500 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-green-600 transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
+<i class="fa-brands fa-whatsapp"></i> Cotizar
+</a>
+</div>
+</div>
+<div class="md:w-1/2 mt-12 md:mt-0 relative fade-in-section is-visible" style="transition-delay: 200ms;">
+<div class="relative w-full max-w-md mx-auto">
+<img src="https://i.imgur.com/v3D3cv6.jpeg" alt="NextGen Limpieza" class="w-full h-auto rounded-xl shadow-2xl animate-[bounce_3s_infinite]" style="filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));">
+<div class="absolute top-0 right-0 w-16 h-16 bg-blue-300 rounded-full opacity-50 blur-xl animate-pulse"></div>
+<div class="absolute bottom-10 left-10 w-24 h-24 bg-white rounded-full opacity-30 blur-xl"></div>
+</div>
+</div>
+</div>
+<div class="hero-shape">
+<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+<path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+</svg>
+</div>
+</section>
 
-                        <!-- Tarjeta 3 (Sistema Giratorio) - PRECIO: $220 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$220</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
-                                <!-- Imagen real 3 -->
-                                <img src="https://i.imgur.com/l6Elvc2.jpeg" alt="Trapeador Sistema Giratorio" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-3 text-center">
-                                <p class="text-sm text-gray-500 mt-1">Incorpora un bastón largo para acceder a lugares difíciles. Su bastón de 1.37m reduce dolores lumbares evitando malas posturas.</p>
-                            </div>
-                        </div>
+<!-- SECCIÓN DE PRODUCTOS: TRAPEADORES -->
+<section id="trapeadores" class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 md:px-8">
+<div class="flex flex-col items-start mb-6">
+<div class="inline-block border-b-4 border-blue-500 pb-2">
+<h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Trapeadores</h2>
+</div>
+<p class="mt-4 text-lg text-gray-600 max-w-3xl">
+Trapeadores de <span class="font-bold text-lg text-blue-700">Microfibra</span> española 100% originales. Descubre nuestra línea premium de trapeadores diseñados para máxima absorción y durabilidad. Ideales para todo tipo de superficies, dejando tus pisos impecables con menos esfuerzo.
+<span class="font-bold text-lg text-blue-700">Precio unitario:</span>
+<span class="font-extrabold text-xl text-green-600">$220</span>. ¡Calidad garantizada!
+</p>
+</div>
+<div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+<!-- Tarjeta 1 -->
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$220</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+<img src="https://i.imgur.com/1G841Vo.jpeg" alt="Trapeador Modelo Clásico" class="w-full h-full object-cover">
+</div>
+<div class="p-3 text-center">
+<p class="text-sm text-gray-500 mt-1">Elaborado con microfibra de alta densidad, garantiza una absorción superior. Su mango resistente y ergonómico es ideal para uso diario y limpieza profunda.</p>
+</div>
+</div>
+<!-- Tarjeta 2 -->
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$220</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+<img src="https://i.imgur.com/U1LHk4W.jpeg" alt="Trapeador Microfibra Pro" class="w-full h-full object-cover">
+</div>
+<div class="p-3 text-center">
+<p class="text-sm text-gray-500 mt-1">Diseño de microfibra que atrapa el 99% de las bacterias. Ideal para pisos delicados (madera, laminados) y perfecto para usarse en seco o húmedo, sin dejar residuos.</p>
+</div>
+</div>
+<!-- Tarjeta 3 -->
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$220</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+<img src="https://i.imgur.com/l6Elvc2.jpeg" alt="Trapeador Sistema Giratorio" class="w-full h-full object-cover">
+</div>
+<div class="p-3 text-center">
+<p class="text-sm text-gray-500 mt-1">Incorpora un bastón largo para acceder a lugares difíciles. Su bastón de 1.37m reduce dolores lumbares evitando malas posturas.</p>
+</div>
+</div>
+<!-- Tarjeta 4 -->
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$220</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
+<img src="https://i.imgur.com/fL2ct0o.jpeg" alt="Trapeador Repuestos Industriales" class="w-full h-full object-cover">
+</div>
+<div class="p-3 text-center">
+<p class="text-sm text-gray-500 mt-1">Fibras sintéticas de alta resistencia para uso rudo y profesional disponible en más de 15 colores.</p>
+</div>
+</div>
+</div>
+<div class="mt-8 text-center">
+<a href="https://jimenhersolutions.github.io/nextgen-seccion-trapeadores/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 uppercase tracking-wider" role="button">
+Ver Productos de Trapeadores
+</a>
+</div>
+</div>
+</section>
 
-                        <!-- Tarjeta 4 (Repuestos Industriales) - PRECIO: $220 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$220</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-t-xl overflow-hidden">
-                                <!-- Imagen real 4 -->
-                                <img src="https://i.imgur.com/fL2ct0o.jpeg" alt="Trapeador Repuestos Industriales" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-3 text-center">
-                                <p class="text-sm text-gray-500 mt-1">Fibras sintéticas de alta resistencia para uso rudo y profesional disponible en más de 15 colores.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Botón "Ver Productos" (para Trapeadores) -->
-                    <div class="mt-8 text-center">
-                        <a href="https://jimenhersolutions.github.io/nextgen-seccion-trapeadores/" 
-                           class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 uppercase tracking-wider"
-                           role="button">
-                            Ver Productos de Trapeadores
-                        </a>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- 4. SECCIÓN DE PRODUCTOS: CUBETAS (Carrusel Horizontal) -->
-            <section id="cubetas" class="py-16 bg-gray-100">
-                <div class="max-w-7xl mx-auto px-4 md:px-8">
-                    <!-- Encabezado de la sección (estilo pestaña/título) -->
-                    <div class="flex flex-col items-start mb-6">
-                        <div class="inline-block border-b-4 border-blue-500 pb-2">
-                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Cubetas</h2>
-                        </div>
-                        <!-- Descripción con el precio fijo en VERDE -->
-                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
-                            Cubetas con 
-                            <span class="font-bold text-lg text-blue-700">exprimidor</span> 
-                            para microfibra incluido. Nuestras cubetas están fabricadas con plástico de alta resistencia, ideales para uso intensivo. 
-                            <span class="font-bold text-lg text-blue-700">Precio unitario:</span> 
-                            <span class="font-extrabold text-xl text-green-600">$180</span> por cubeta, disponibles en varios colores.
-                        </p>
-                    </div>
+<!-- SECCIÓN DE PRODUCTOS: CUBETAS -->
+<section id="cubetas" class="py-16 bg-gray-100">
+<div class="max-w-7xl mx-auto px-4 md:px-8">
+<div class="flex flex-col items-start mb-6">
+<div class="inline-block border-b-4 border-blue-500 pb-2">
+<h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Cubetas</h2>
+</div>
+<p class="mt-4 text-lg text-gray-600 max-w-3xl">
+Cubetas con <span class="font-bold text-lg text-blue-700">exprimidor</span> para microfibra incluido. Nuestras cubetas están fabricadas con plástico de alta resistencia, ideales para uso intensivo.
+<span class="font-bold text-lg text-blue-700">Precio unitario:</span>
+<span class="font-extrabold text-xl text-green-600">$180</span> por cubeta, disponibles en varios colores.
+</p>
+</div>
+<div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$180</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/czY6SYk.jpeg" alt="Cubeta de color gris profesional" class="w-full h-full object-cover">
+</div>
+</div>
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$180</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/0M7mEGG.jpeg" alt="Cubeta con escurridor amarillo" class="w-full h-full object-cover">
+</div>
+</div>
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$180</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/OulZxLs.jpeg" alt="Cubeta industrial de gran capacidad" class="w-full h-full object-cover">
+</div>
+</div>
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$180</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/HcIVZYL.jpeg" alt="Juego de cubetas de colores" class="w-full h-full object-cover">
+</div>
+</div>
+</div>
+</div>
+</section>
 
-                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
-                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
-                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
-                        
-                        <!-- Tarjeta 1 (Cubeta 1) - PRECIO: $180 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$180</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/czY6SYk.jpeg" alt="Cubeta de color gris profesional" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        
-                        <!-- Tarjeta 2 (Cubeta 2) - PRECIO: $180 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$180</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/0M7mEGG.jpeg" alt="Cubeta con escurridor amarillo" class="w-full h-full object-cover">
-                            </div>
-                        </div>
+<!-- SECCIÓN DE PRODUCTOS: ESCOBAS Y CEPILLOS -->
+<section id="escobas" class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 md:px-8">
+<div class="flex flex-col items-start mb-6">
+<div class="inline-block border-b-4 border-blue-500 pb-2">
+<h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Escobas y Cepillos</h2>
+</div>
+<p class="mt-4 text-lg text-gray-600 max-w-3xl">
+Escobas de pelo de ángel de policarbonato indeformable ideales para interior y exterior y barrido eficiente para cada rincón. Con mango ergonómico que facilita el agarre de la escoba y bastón de 1.37 metros calibre 34 para uso rudo que te ayuda a disminuir dolores lumbares.
+<span class="font-bold text-lg text-blue-700">Precio unitario:</span>
+<span class="font-extrabold text-xl text-green-600">$180</span>. Consulta disponibilidad.
+</p>
+</div>
+<div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$180</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/hJO6Et0.jpeg" alt="Escoba de exterior" class="w-full h-full object-cover">
+</div>
+</div>
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$180</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/ayejAr2.jpeg" alt="Escoba de interiores con recogedor" class="w-full h-full object-cover">
+</div>
+</div>
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$180</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/deC8slt.jpeg" alt="Cepillo de mango corto" class="w-full h-full object-cover">
+</div>
+</div>
+</div>
+<div class="mt-8 text-center">
+<a href="https://jimenhersolutions.github.io/NextGen-seccion-escobas/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 uppercase tracking-wider" role="button">
+Ver Productos de Escobas
+</a>
+</div>
+</div>
+</section>
 
-                        <!-- Tarjeta 3 (Cubeta 3) - PRECIO: $180 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$180</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/OulZxLs.jpeg" alt="Cubeta industrial de gran capacidad" class="w-full h-full object-cover">
-                            </div>
-                        </div>
+<!-- SECCIÓN DE PRODUCTOS: RECOGEDORES -->
+<section id="recogedores" class="py-16 bg-gray-100">
+<div class="max-w-7xl mx-auto px-4 md:px-8">
+<div class="flex flex-col items-start mb-6">
+<div class="inline-block border-b-4 border-blue-500 pb-2">
+<h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Recogedores</h2>
+</div>
+<p class="mt-4 text-lg text-gray-600 max-w-3xl">
+Recogedores <span class="font-bold text-lg text-blue-700">ergonónomicos</span> con cepillo quita pelusa incluido en el diseño. Soluciones eficientes para recoger todo tipo de residuos.
+<span class="font-bold text-lg text-blue-700">Precio unitario:</span>
+<span class="font-extrabold text-xl text-green-600">$180</span>. ¡Ideales para acompañar tus escobas!
+</p>
+</div>
+<div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$180</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/MbchD0x.jpeg" alt="Recogedor 1" class="w-full h-full object-cover">
+</div>
+</div>
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$180</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/ThOIC3a.jpeg" alt="Recogedor 2" class="w-full h-full object-cover">
+</div>
+</div>
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$180</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/QCRPZll.jpeg" alt="Recogedor 3" class="w-full h-full object-cover">
+</div>
+</div>
+</div>
+</div>
+</section>
 
-                        <!-- Tarjeta 4 (Cubeta 4) - PRECIO: $180 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$180</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/HcIVZYL.jpeg" alt="Juego de cubetas de colores" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- 5. SECCIÓN DE PRODUCTOS: ESCOBAS Y CEPILLOS -->
-            <section id="escobas" class="py-16 bg-white"> 
-                <div class="max-w-7xl mx-auto px-4 md:px-8">
-                    <!-- Encabezado de la sección (estilo pestaña/título) -->
-                    <div class="flex flex-col items-start mb-6">
-                        <div class="inline-block border-b-4 border-blue-500 pb-2">
-                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Escobas y Cepillos</h2>
-                        </div>
-                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
-                            Escobas de pelo de ángel de policarbonato indeformable ideales para interior y exterior y barrido eficiente para cada rincón. Con mango ergonómico que facilita el agarre de la escoba y bastón de 1.37 metros calibre 34 para uso rudo que te ayuda a disminuir dolores lumbares.
-                            <!-- Precio fijo agregado para Escobas y Cepillos -->
-                            <span class="font-bold text-lg text-blue-700">Precio unitario:</span> 
-                            <span class="font-extrabold text-xl text-green-600">$180</span>. 
-                            Consulta disponibilidad.
-                        </p>
-                    </div>
-
-                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
-                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
-                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
-                        
-                        <!-- Tarjeta 1 (Escoba 1) - PRECIO: $180 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$180</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/hJO6Et0.jpeg" alt="Escoba de exterior" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        
-                        <!-- Tarjeta 2 (Escoba 2) - PRECIO: $180 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$180</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/ayejAr2.jpeg" alt="Escoba de interiores con recogedor" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-
-                        <!-- Tarjeta 3 (Escoba 3) - PRECIO: $180 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$180</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/deC8slt.jpeg" alt="Cepillo de mango corto" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Botón "Ver Productos" (para Escobas) -->
-                    <div class="mt-8 text-center">
-                        <a href="https://jimenhersolutions.github.io/NextGen-seccion-escobas/" 
-                           class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 uppercase tracking-wider"
-                           role="button">
-                            Ver Productos de Escobas
-                        </a>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- 6. SECCIÓN DE PRODUCTOS: RECOGEDORES -->
-            <section id="recogedores" class="py-16 bg-gray-100">
-                <div class="max-w-7xl mx-auto px-4 md:px-8">
-                    <!-- Encabezado de la sección -->
-                    <div class="flex flex-col items-start mb-6">
-                        <div class="inline-block border-b-4 border-blue-500 pb-2">
-                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Recogedores</h2>
-                        </div>
-                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
-                            Recogedores <span class="font-bold text-lg text-blue-700">ergonónomicos</span> con cepillo quita pelusa incluido en el diseño. Soluciones eficientes para recoger todo tipo de residuos.
-                            <!-- Precio fijo agregado para Recogedores -->
-                            <span class="font-bold text-lg text-blue-700">Precio unitario:</span> 
-                            <span class="font-extrabold text-xl text-green-600">$180</span>. 
-                            ¡Ideales para acompañar tus escobas!
-                        </p>
-                    </div>
-
-                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
-                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
-                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
-                        
-                        <!-- Tarjeta 1 (Recogedor 1) - PRECIO: $180 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$180</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/MbchD0x.jpeg" alt="Recogedor 1" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        
-                        <!-- Tarjeta 2 (Recogedor 2) - PRECIO: $180 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$180</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/ThOIC3a.jpeg" alt="Recogedor 2" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-
-                        <!-- Tarjeta 3 (Recogedor 3) - PRECIO: $180 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$180</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/QCRPZll.jpeg" alt="Recogedor 3" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 7. SECCIÓN DE PRODUCTOS: PAÑOS DE MICROFIBRA -->
-            <section id="microfibra" class="py-16 bg-white">
-                <div class="max-w-7xl mx-auto px-4 md:px-8">
-                    <!-- Encabezado de la sección -->
-                    <div class="flex flex-col items-start mb-6">
-                        <div class="inline-block border-b-4 border-blue-500 pb-2">
-                            <h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Paños de Microfibra</h2>
-                        </div>
-                        <p class="mt-4 text-lg text-gray-600 max-w-3xl">
-                            Trapos de <span class="font-bold text-lg text-blue-700">microfibra</span> super absorbente para todo tipo de superficie. No rayan y son ideales para superficies delicadas.
-                            <!-- Precio por unidad: $40 -->
-                            <span class="font-bold text-lg text-blue-700">Precio por unidad:</span> 
-                            <span class="font-extrabold text-xl text-green-600">$40</span>. 
-                            Disponibles en paquetes de 5.
-                        </p>
-                    </div>
-
-                    <!-- Contenedor Deslizable Horizontal (Scrollable) -->
-                    <!-- NOTA: Usamos no-scrollbar para ocultar la barra en esta sección -->
-                    <div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
-                        
-                        <!-- Tarjeta 1 (Paño 1) - PRECIO: $40 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$40</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/Ndy20BV.jpeg" alt="Paño de microfibra 1" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        
-                        <!-- Tarjeta 2 (Paño 2) - PRECIO: $40 -->
-                        <div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                             <!-- ETIQUETA DE PRECIO APLICADA -->
-                            <div class="etiqueta-precio">$40</div>
-                            <div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
-                                <img src="https://i.imgur.com/RXQUZsc.jpeg" alt="Paño de microfibra 2" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- SECCIÓN DE PRODUCTOS: PAÑOS DE MICROFIBRA -->
+<section id="microfibra" class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 md:px-8">
+<div class="flex flex-col items-start mb-6">
+<div class="inline-block border-b-4 border-blue-500 pb-2">
+<h2 class="font-logo text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-wide">Paños de Microfibra</h2>
+</div>
+<p class="mt-4 text-lg text-gray-600 max-w-3xl">
+Trapos de <span class="font-bold text-lg text-blue-700">microfibra</span> super absorbente para todo tipo de superficie. No rayan y son ideales para superficies delicadas.
+<span class="font-bold text-lg text-blue-700">Precio por unidad:</span>
+<span class="font-extrabold text-xl text-green-600">$40</span>. Disponibles en paquetes de 5.
+</p>
+</div>
+<div class="flex overflow-x-auto gap-6 pb-4 no-scrollbar">
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$40</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/Ndy20BV.jpeg" alt="Paño de microfibra 1" class="w-full h-full object-cover">
+</div>
+</div>
+<div class="relative flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="etiqueta-precio">$40</div>
+<div class="aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden">
+<img src="https://i.imgur.com/RXQUZsc.jpeg" alt="Paño de microfibra 2" class="w-full h-full object-cover">
+</div>
+</div>
+</div>
+</div>
+</section>
 
             <!-- 8. SECCIÓN DE PRODUCTOS: AHORRA DINERO COMPRANDO EN COMBO -->
             <section id="combos" class="py-16 bg-gray-100">
@@ -694,8 +636,9 @@
             </section>
             
             <!-- 10. SECCIÓN DE MISIÓN (NUEVA POSICIÓN) -->
-            <section id="mision" class="py-16 bg-gray-50">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section" style="transition-delay: 200ms;">
+            <!-- CLASE fade-in-section presente para Intersection Observer -->
+            <section id="mision" class="py-16 bg-gray-50 fade-in-section">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" style="transition-delay: 200ms;">
                     <h2 class="text-blue-700 font-semibold tracking-wide uppercase text-sm mb-3">Nuestro Compromiso</h2>
                     <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
                         <!-- Imagen de la Misión - Usa la imagen de interiores -->
@@ -715,8 +658,9 @@
             </section>
 
             <!-- 11. SECCIÓN DE VISIÓN (NUEVA POSICIÓN) -->
-            <section id="vision" class="py-16 bg-white">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section">
+            <!-- CLASE fade-in-section presente para Intersection Observer -->
+            <section id="vision" class="py-16 bg-white fade-in-section">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 class="text-blue-700 font-semibold tracking-wide uppercase text-sm mb-3">Nuestra Meta</h2>
                     <div class="bg-gray-50 p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
                         <!-- Imagen de la Visión - Usa la misma imagen de interiores -->
@@ -736,8 +680,9 @@
             </section>
             
             <!-- 12. SECCIÓN DE VALORES (Mantiene su posición) -->
-            <section id="valores" class="py-16 bg-blue-50">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section" style="transition-delay: 300ms;">
+            <!-- CLASE fade-in-section presente para Intersection Observer -->
+            <section id="valores" class="py-16 bg-blue-50 fade-in-section" style="transition-delay: 300ms;">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 class="text-blue-700 font-semibold tracking-wide uppercase text-sm mb-3">Principios Fundamentales</h2>
                     <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-blue-600">
                         <h3 class="mt-0 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 mb-6 flex items-center justify-center gap-3">
@@ -770,9 +715,10 @@
             </section>
 
             <!-- 13. SECCIÓN DE CONTACTO/UBICACIÓN (Mantiene su posición) -->
-            <section id="ubicacion" class="py-20 bg-white">
+            <!-- CLASE fade-in-section presente para Intersection Observer -->
+            <section id="ubicacion" class="py-20 bg-white fade-in-section">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12 fade-in-section">
+                    <div class="text-center mb-12">
                         <h2 class="text-blue-600 font-semibold tracking-wide uppercase text-sm">Contáctanos</h2>
                         <h3 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                             Solicita tu Pedido a Domicilio
@@ -780,7 +726,7 @@
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                         <!-- Columna 1: Contacto Rápido -->
-                        <div class="lg:col-span-1 bg-gray-50 p-8 rounded-xl shadow-lg fade-in-section">
+                        <div class="lg:col-span-1 bg-gray-50 p-8 rounded-xl shadow-lg">
                             <h4 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-address-book text-blue-500"></i> Información de Contacto</h4>
                             <ul class="space-y-4 text-gray-600">
                                 <li class="flex items-center gap-3">
@@ -804,7 +750,7 @@
                             </ul>
                         </div>
                         <!-- Columna 2: Mensaje de Entrega a Domicilio (Reemplazo del Mapa) -->
-                        <div class="lg:col-span-2 rounded-xl shadow-xl overflow-hidden fade-in-section bg-blue-600 flex items-center justify-center text-white p-10" style="transition-delay: 150ms;">
+                        <div class="lg:col-span-2 rounded-xl shadow-xl overflow-hidden bg-blue-600 flex items-center justify-center text-white p-10" style="transition-delay: 150ms;">
                             <div class="text-center">
                                 <i class="fa-solid fa-truck-fast text-6xl mb-4"></i>
                                 <h4 class="text-3xl font-bold mb-3">¡Solo Entregas a Domicilio!</h4>
@@ -831,49 +777,32 @@
         </a>
     </div>
 
+    <!-- Script para controlar la aparición de secciones al hacer scroll (fade-in) -->
     <script>
-        // Lógica del carrusel para cambiar imágenes automáticamente
-        window.onload = function () {
-            // Selecciona todas las diapositivas del carrusel
-            const slides = document.querySelectorAll('.carousel-slide');
-            
-            // Si no se encuentran diapositivas, se detiene la ejecución para evitar errores.
-            if (slides.length === 0) {
-                console.error("Carousel: No slides found.");
-                return; // Sale de la función si no hay slides.
-            }
-            
-            let currentSlide = 0;
-            const totalSlides = slides.length;
-            const intervalTime = 3000; // 3000 ms = 3 segundos
-
-            /** Muestra la diapositiva en el índice dado, ocultando las demás con transición de opacidad. */
-            function showSlide(index) {
-                // Asegura que el índice esté dentro del rango [0, totalSlides-1]
-                currentSlide = (index + totalSlides) % totalSlides; 
-                
-                slides.forEach((slide, i) => {
-                    if (i === currentSlide) {
-                        slide.classList.remove('opacity-0');
-                        slide.classList.add('opacity-100');
-                    } else {
-                        slide.classList.remove('opacity-100');
-                        slide.classList.add('opacity-0');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Usa Intersection Observer para detectar cuándo un elemento entra al viewport
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Si el elemento es visible, añade la clase para hacerlo opaco (visible)
+                        entry.target.classList.add('is-visible');
+                        // Deja de observar el elemento
+                        observer.unobserve(entry.target);
                     }
                 });
-            }
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1 // Se activa cuando el 10% del elemento es visible
+            });
 
-            /** Avanza a la siguiente diapositiva. */
-            function nextSlide() {
-                showSlide(currentSlide + 1);
-            }
-            
-            // Inicia el carrusel
-            showSlide(currentSlide);
-
-            // Configura el intervalo para el cambio automático cada 3 segundos
-            setInterval(nextSlide, intervalTime);
-        };
+            // Aplica el observador a todos los elementos con la clase .fade-in-section
+            document.querySelectorAll('.fade-in-section').forEach(section => {
+                // El Hero tiene 'is-visible' aplicado directamente, por lo que no lo observamos si ya tiene la clase.
+                if (!section.classList.contains('is-visible')) {
+                    observer.observe(section);
+                }
+            });
+        });
     </script>
 </body>
 </html>
